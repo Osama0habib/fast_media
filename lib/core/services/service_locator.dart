@@ -32,7 +32,7 @@ class ServiceLocator {
   void init(){
     /// Bloc
     sl.registerFactory(() => AuthenticationBloc(sl(),sl()));
-    sl.registerFactory(() => SignInBloc(sl(),sl(),sl(),sl(),sl()));
+    sl.registerFactory(() => SignInBloc(sl(),sl(),sl(),sl(),sl(),sl(),sl()));
     sl.registerFactory(() => SignUpBloc(sl(), sl()));
 
 
@@ -41,7 +41,7 @@ class ServiceLocator {
     sl.registerLazySingleton<BaseDatabaseRemoteDataSource>(() => DatabaseRemoteDatasource());
 
     /// Repository
-    sl.registerLazySingleton<BaseAuthRepository>(() => AuthRepository(sl()));
+    sl.registerLazySingleton<BaseAuthRepository>(() => AuthRepository());
     sl.registerLazySingleton<BaseDatabaseRepository>(() => DatabaseRepository(sl()));
 
 

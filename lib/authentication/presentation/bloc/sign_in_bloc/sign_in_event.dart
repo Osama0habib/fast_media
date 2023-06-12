@@ -76,3 +76,23 @@ class GetUSerDataEvent extends SignInEvent {
 
 }
 
+class SaveUserDataEvent extends SignInEvent {
+  final UserModel userModel;
+
+  const SaveUserDataEvent(this.userModel);
+
+  @override
+  List<Object> get props => [userModel];
+
+}
+
+class ForgetPasswordEvent extends SignInEvent {
+  final String email;
+
+  const ForgetPasswordEvent(this.email);
+
+  @override
+  List<Object> get props => [email];
+
+}
+

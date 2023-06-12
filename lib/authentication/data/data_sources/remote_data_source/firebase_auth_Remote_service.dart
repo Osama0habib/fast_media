@@ -38,19 +38,20 @@ class FirebaseAuthRemoteService extends BaseFirebaseAuthRemoteDataSource {
 
       return userCredential;
     } on FirebaseAuthException catch (e) {
+      print("exception  : $e" );
       throw FirebaseAuthException(code: e.code, message: e.message);
     }
   }
 
   @override
-  Future<UserCredential> signInWithEmail(SignInWithEmailParameter parameters) async {
-    try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+  Future<UserCredential> signInWithEmail(SignInWithEmailParameter parameters)  {
+    // try {
+      return  _auth.signInWithEmailAndPassword(
           email: parameters.email, password: parameters.password);
-      return userCredential;
-    } on FirebaseAuthException catch (e) {
-      throw FirebaseAuthException(code: e.code, message: e.message);
-    }
+    // } on FirebaseAuthException catch (e) {
+    //   print("salfknalkfn : $e");
+    //   throw FirebaseAuthException(code: e.code, message: e.message);
+    // }
   }
 
   // Future<void> verifyEmail() async {

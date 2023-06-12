@@ -1,6 +1,7 @@
 import 'package:fast_media/authentication/presentation/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:fast_media/colors/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,6 +18,7 @@ Future<void> main() async {
   ).then((value) {
     ServiceLocator().init();
   });
+
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }

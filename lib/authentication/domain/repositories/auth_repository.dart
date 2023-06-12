@@ -14,118 +14,146 @@ import '../../data/repositories/base_auth_repository.dart';
 import '../use_cases/verify_email_usecase.dart';
 
 class AuthRepository implements BaseAuthRepository {
-  BaseFirebaseAuthRemoteDataSource firebaseAuthRemoteService ;
+  final _auth = FirebaseAuth.instance;
 
-  AuthRepository(this.firebaseAuthRemoteService);
+  AuthRepository();
 
   @override
   Stream<User?> authChanges(NoParameter parameters) {
-   return firebaseAuthRemoteService.authChanges(parameters);
+    return _auth.authStateChanges();
   }
 
   @override
-  Future<Either<FirebaseAuthException, UserCredential>> signInWithApple(NoParameter parameters) async {
-    final result = await firebaseAuthRemoteService.signInWithApple(parameters);
+  Future<Either<FirebaseAuthException, UserCredential>> signInWithApple(
+      NoParameter parameters) async {
     try {
+      final result = await _auth.signInWithProvider(AppleAuthProvider());
       return Right(result);
-    }on FirebaseAuthException catch (e){
-      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthException(code: e.code, message: e.message));
     }
   }
 
   @override
-  Future<Either<FirebaseAuthException, UserCredential>> signInWithEmail(SignInWithEmailParameter parameters) async {
-    final result = await firebaseAuthRemoteService.signInWithEmail(parameters);
+  Future<Either<FirebaseAuthException, UserCredential>> signInWithEmail(
+      SignInWithEmailParameter parameters) async {
+    // return result;
     try {
+      final result = await _auth.signInWithEmailAndPassword(
+          email: parameters.email, password: parameters.password);
       return Right(result);
-    }on FirebaseAuthException catch (e){
-      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    } on FirebaseAuthException catch (e) {
+      print("firebaseAuthExceptionnnnn : $e");
+      return Left(FirebaseAuthException(code: e.code, message: e.message));
     }
   }
 
   @override
-  Future<Either<FirebaseAuthException, UserCredential>> signInWithFacebook(NoParameter parameters) async {
-    final result = await firebaseAuthRemoteService.signInWithFaceBook(parameters);
+  Future<Either<FirebaseAuthException, UserCredential>> signInWithFacebook(
+      NoParameter parameters) async {
     try {
+      final result = await _auth.signInWithProvider(FacebookAuthProvider());
       return Right(result);
-    }on FirebaseAuthException catch (e){
-      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthException(code: e.code, message: e.message));
     }
   }
 
   @override
-  Future<Either<FirebaseAuthException, UserCredential>> signInWithGoogle(NoParameter parameters) async {
-    final result = await firebaseAuthRemoteService.signInWithGoogle(parameters);
+  Future<Either<FirebaseAuthException, UserCredential>> signInWithGoogle(
+      NoParameter parameters) async {
     try {
+      final result = await _auth.signInWithProvider(GoogleAuthProvider());
+
       return Right(result);
-    }on FirebaseAuthException catch (e){
-      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthException(code: e.code, message: e.message));
     }
   }
 
   @override
-  Future<Either<FirebaseAuthException, void>> signOut(NoParameter parameters) async {
-    final result = await firebaseAuthRemoteService.signOut(parameters);
+  Future<Either<FirebaseAuthException, void>> signOut(
+      NoParameter parameters) async {
     try {
+      final result = await _auth.signOut();
       return Right(result);
-    }on FirebaseAuthException catch (e){
-      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthException(code: e.code, message: e.message));
     }
   }
 
   @override
-  Future<Either<FirebaseAuthException, UserCredential>> signUpWithEmail(SignUpWithEmailParameter parameters) async {
-    final result = await firebaseAuthRemoteService.signUpWithEmail(parameters);
+  Future<Either<FirebaseAuthException, UserCredential>> signUpWithEmail(
+      SignUpWithEmailParameter parameters) async {
     try {
+      final result = await _auth.createUserWithEmailAndPassword(
+          email: parameters.email, password: parameters.password);
+
       return Right(result);
-    }on FirebaseAuthException catch (e){
-      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthException(code: e.code, message: e.message));
     }
   }
 
   @override
-  Future<Either<FirebaseAuthException, void>> confirmNewPassword(ConfirmNewPasswordParameter parameters) async {
-    final result = await firebaseAuthRemoteService.confirmNewPassword(parameters);
+  Future<Either<FirebaseAuthException, void>> confirmNewPassword(
+      ConfirmNewPasswordParameter parameters) async {
     try {
+      final result = await _auth.confirmPasswordReset(
+          code: parameters.code, newPassword: parameters.password);
+
       return Right(result);
-    }on FirebaseAuthException catch (e){
-      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthException(code: e.code, message: e.message));
     }
   }
 
   @override
-  Future<Either<FirebaseAuthException, void>> forgetPassword(ForgetPasswordParameter parameters) async {
-    final result = await firebaseAuthRemoteService.forgetPassword(parameters);
+  Future<Either<FirebaseAuthException, void>> forgetPassword(
+      ForgetPasswordParameter parameters) async {
     try {
+      final result = await _auth.sendPasswordResetEmail(
+          email: parameters.email,
+          actionCodeSettings: ActionCodeSettings(
+              url: "https://fastmedia.page.link/resetPassword",
+              // dynamicLinkDomain: "https://fastmedia.page.link",
+              androidInstallApp: false,
+              androidPackageName: "com.example.fast_media",handleCodeInApp: true,iOSBundleId: "com.example.fast_media",));
+
       return Right(result);
-    }on FirebaseAuthException catch (e){
-      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthException(code: e.code, message: e.message));
     }
   }
 
   @override
-  Future<Either<FirebaseAuthException, void>> verifyEmail(NoParameter parameters) async {
-    final result = await firebaseAuthRemoteService.verifyEmail(parameters);
+  Future<Either<FirebaseAuthException, void>> verifyEmail(
+      NoParameter parameters) async {
     try {
+      final result = await _auth.currentUser?.sendEmailVerification();
+
       return Right(result);
-    }on FirebaseAuthException catch (e){
-      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthException(code: e.code, message: e.message));
     }
   }
 
   @override
-  Future<Either<FirebaseAuthException, String>> verifyPasswordResetCode(VerifyPasswordResetCodeParameter parameters) async {
-    final result = await firebaseAuthRemoteService.verifyPasswordResetCode(parameters);
-    return _sharedResult(result);
-  }
-
-
-  _sharedResult(dynamic result){
+  Future<Either<FirebaseAuthException, String>> verifyPasswordResetCode(
+      VerifyPasswordResetCodeParameter parameters) async {
     try {
+      final result = await _auth.verifyPasswordResetCode(parameters.code);
       return Right(result);
-    }on FirebaseAuthException catch (e){
-      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthException(code: e.code, message: e.message));
     }
   }
+
+// _sharedResult(dynamic result){
+//   try {
+//     return Right(result);
+//   }on FirebaseAuthException catch (e){
+//     return Left(FirebaseAuthException(code: e.code,message: e.message));
+//   }
+// }
 }
-

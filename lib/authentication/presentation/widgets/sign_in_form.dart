@@ -35,6 +35,7 @@ class SignInForm extends StatelessWidget {
          CustomTextField(
           hint: 'Enter your email',
           keyboardType: TextInputType.emailAddress,
+
           prefixIcon: const Icon(Icons.email_outlined),
           onchange:(String email) => bloc.add(EmailChangesEvent(email)),
 
