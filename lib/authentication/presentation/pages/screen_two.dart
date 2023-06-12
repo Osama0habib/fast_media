@@ -1,12 +1,12 @@
-import 'package:fast_media/colors/colors.dart';
-import 'package:fast_media/syles/app_styles.dart';
-import 'package:fast_media/views/screen_two.dart';
-import 'package:fast_media/widgets/default_button.dart';
+import 'package:fast_media/authentication/presentation/pages/sign_in_view.dart';
+import 'package:fast_media/authentication/presentation/pages/sign_up_view.dart';
+
+import 'package:fast_media/authentication/presentation/widgets/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SplashView extends StatelessWidget {
-  const SplashView({super.key});
+class ScreenTwo extends StatelessWidget {
+  const ScreenTwo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,32 +26,38 @@ class SplashView extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/images/logo.png',
-                  width: w * 0.8,
+                  width: w * 0.7,
                 ),
                 const SizedBox(
                   height: 32,
                 ),
-                SizedBox(
-                  width: w * 0.82,
-                  child: Text(
-                    'watch your favourite movie or seris on only one platform you can watch it any time and any where ',
-                    style: AppStyles.heading_2.copyWith(color: kWireframe_3),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
                 const SizedBox(
-                  height: 60,
+                  height: 42,
                 ),
                 DefaultButton(
-                  btnText: 'Get Started',
+                  btnText: 'Sign In',
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const ScreenTwo(),
+                        builder: (context) => const SignInView(),
                       ),
                     );
                   },
-                )
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                DefaultButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SignUpView(),
+                      ),
+                    );
+                  },
+                  btnText: 'Sign Up',
+                  fill: false,
+                ),
               ],
             ),
           )

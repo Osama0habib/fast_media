@@ -9,10 +9,12 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.isPassword = false,
     this.keyboardType,
+    required this.onchange,
   });
   final String? hint;
   final Widget? prefixIcon;
   final bool isPassword;
+  final Function(String) onchange;
   final TextInputType? keyboardType;
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class CustomTextField extends StatelessWidget {
         keyboardType: keyboardType,
         enableInteractiveSelection: false,
         style: const TextStyle(color: Colors.white),
+        onChanged: onchange,
         decoration: InputDecoration(
           border: InputBorder.none,
           filled: true,

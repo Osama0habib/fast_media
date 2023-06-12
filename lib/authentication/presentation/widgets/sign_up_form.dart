@@ -1,7 +1,9 @@
+import 'package:fast_media/authentication/presentation/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'package:fast_media/colors/colors.dart';
 import 'package:fast_media/syles/app_styles.dart';
-import 'package:fast_media/widgets/custom_text_field.dart';
+import 'package:fast_media/authentication/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({
@@ -10,6 +12,7 @@ class SignUpForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc =context.read<SignUpBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -29,9 +32,10 @@ class SignUpForm extends StatelessWidget {
         ),
 
         // email textField
-        const CustomTextField(
+         CustomTextField(
           hint: 'Enter your name',
-          prefixIcon: Icon(Icons.person_outline),
+          prefixIcon: const Icon(Icons.person_outline),
+          onchange:(String userName) => bloc.add(UserNameChangesEvent(userName)),
         ),
 
         const SizedBox(
@@ -54,10 +58,12 @@ class SignUpForm extends StatelessWidget {
         ),
 
         // email textField
-        const CustomTextField(
+         CustomTextField(
           hint: 'Enter your email',
           keyboardType: TextInputType.emailAddress,
-          prefixIcon: Icon(Icons.email_outlined),
+          prefixIcon: const Icon(Icons.email_outlined),
+          onchange:(String email) => bloc.add(EmailChangesEvent(email)),
+
         ),
 
         const SizedBox(
@@ -80,9 +86,11 @@ class SignUpForm extends StatelessWidget {
         ),
 
         //password TextField
-        const CustomTextField(
+         CustomTextField(
           hint: 'Enter your password',
-          prefixIcon: Icon(Icons.lock_outline),
+          prefixIcon: const Icon(Icons.lock_outline),
+          onchange:(String password) => bloc.add(PasswordChangesEvent(password)),
+
         ),
 
         const SizedBox(
@@ -105,10 +113,12 @@ class SignUpForm extends StatelessWidget {
         ),
 
         // phone number textField
-        const CustomTextField(
+         CustomTextField(
           hint: 'Enter your number',
           keyboardType: TextInputType.number,
-          prefixIcon: Icon(Icons.phone_in_talk_outlined),
+          prefixIcon: const Icon(Icons.phone_in_talk_outlined),
+          onchange:(String phone) => bloc.add(PhoneChangesEvent(phone)),
+
         ),
       ],
     );

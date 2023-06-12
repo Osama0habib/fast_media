@@ -10,9 +10,8 @@ abstract class BaseDatabaseRemoteDataSource {
 }
 
 class DatabaseRemoteDatasource extends BaseDatabaseRemoteDataSource {
-  final FirebaseFirestore db ;
-  DatabaseRemoteDatasource(this.db);
-
+  final FirebaseFirestore db  = FirebaseFirestore.instance;
+  DatabaseRemoteDatasource();
   @override
   Future<void> saveUserData(SaveUserDataParameter parameters) async {
     try {

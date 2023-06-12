@@ -1,7 +1,9 @@
+import 'package:fast_media/authentication/presentation/bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'package:fast_media/colors/colors.dart';
 import 'package:fast_media/syles/app_styles.dart';
-import 'package:fast_media/widgets/custom_text_field.dart';
+import 'package:fast_media/authentication/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInForm extends StatelessWidget {
   const SignInForm({
@@ -10,6 +12,7 @@ class SignInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<SignInBloc>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -29,10 +32,12 @@ class SignInForm extends StatelessWidget {
         ),
 
         // email textField
-        const CustomTextField(
+         CustomTextField(
           hint: 'Enter your email',
           keyboardType: TextInputType.emailAddress,
-          prefixIcon: Icon(Icons.email_outlined),
+          prefixIcon: const Icon(Icons.email_outlined),
+          onchange:(String email) => bloc.add(EmailChangesEvent(email)),
+
         ),
 
         const SizedBox(
@@ -55,10 +60,12 @@ class SignInForm extends StatelessWidget {
         ),
 
         //password TextField
-        const CustomTextField(
+         CustomTextField(
           hint: 'Enter your password',
           isPassword: true,
-          prefixIcon: Icon(Icons.lock_outline),
+          prefixIcon: const Icon(Icons.lock_outline),
+          onchange:(String password) => bloc.add(PasswordChangesEvent(password)),
+
         ),
       ],
     );

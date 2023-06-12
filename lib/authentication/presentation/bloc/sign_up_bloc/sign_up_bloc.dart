@@ -29,6 +29,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   Future<FutureOr<void>> _signUpWithEmail(
       SignUpWithEmailEvent event, Emitter<SignUpState> emit) async {
     emit(state.copyWith(isLoading: true));
+    print(_isFormValid());
     if (_isFormValid()) {
       final result = await signUpWithEmailUseCase(SignUpWithEmailParameter(
           email: event.email, password: event.password));
@@ -61,24 +62,24 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   FutureOr<void> _onPasswordChange(
       PasswordChangesEvent event, Emitter<SignUpState> emit) {
     emit(state.copyWith(
-      email: event.password,
-      isEmailValid: _isPasswordValid(event.password),
+      password: event.password,
+      isPasswordValid: _isPasswordValid(event.password),
     ));
   }
 
   FutureOr<void> _onUserNameChange(
       UserNameChangesEvent event, Emitter<SignUpState> emit) {
     emit(state.copyWith(
-      email: event.useName,
-      isEmailValid: _isUserNameValid(event.useName),
+      userName: event.useName,
+      isUserNameValid: _isUserNameValid(event.useName),
     ));
   }
 
   FutureOr<void> _onPhoneChange(
       PhoneChangesEvent event, Emitter<SignUpState> emit) {
     emit(state.copyWith(
-      email: event.phone,
-      isEmailValid: _isPhoneValid(event.phone),
+      phone: event.phone,
+      isPhoneValid: _isPhoneValid(event.phone),
     ));
   }
 
@@ -90,17 +91,17 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     r'^.{8,}$',
   );
 
-  final RegExp _userNameRegExp =
-      RegExp(r'^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$');
-
-  final RegExp _phoneRegExp = RegExp(r'^(?:[+0]9)?[0-9]{10}$');
+  // final RegExp _userNameRegExp =
+  //     RegExp(r'^(?=[a-zA-Z0-9._]{5,20}$)(?!.*[_.]{2})[^_.].*[^_.]$');
+  //
+  // final RegExp _phoneRegExp = RegExp(r'^(?:[+0]9)?[0-9]{10}$');
 
   bool _isPhoneValid(String phone) {
-    return _phoneRegExp.hasMatch(phone);
+    return phone.length >= 11 ;
   }
 
   bool _isUserNameValid(String userName) {
-    return _userNameRegExp.hasMatch(userName);
+    return userName.isNotEmpty;
   }
 
   bool _isEmailValid(String email) {
@@ -112,6 +113,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   bool _isFormValid() {
+    print("state.isEmailValid : ${state.isEmailValid} , state.isPasswordValid : ${state.isPasswordValid} , state.isUserNameValid : ${state.isUserNameValid} , state.isPhoneValid : ${state.isPhoneValid}");
     return state.isEmailValid &&
         state.isPasswordValid &&
         state.isUserNameValid &&

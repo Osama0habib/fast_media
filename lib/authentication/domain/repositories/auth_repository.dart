@@ -14,7 +14,7 @@ import '../../data/repositories/base_auth_repository.dart';
 import '../use_cases/verify_email_usecase.dart';
 
 class AuthRepository implements BaseAuthRepository {
-  FirebaseAuthRemoteService firebaseAuthRemoteService ;
+  BaseFirebaseAuthRemoteDataSource firebaseAuthRemoteService ;
 
   AuthRepository(this.firebaseAuthRemoteService);
 
@@ -26,25 +26,41 @@ class AuthRepository implements BaseAuthRepository {
   @override
   Future<Either<FirebaseAuthException, UserCredential>> signInWithApple(NoParameter parameters) async {
     final result = await firebaseAuthRemoteService.signInWithApple(parameters);
-    return _sharedResult(result);
+    try {
+      return Right(result);
+    }on FirebaseAuthException catch (e){
+      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    }
   }
 
   @override
   Future<Either<FirebaseAuthException, UserCredential>> signInWithEmail(SignInWithEmailParameter parameters) async {
     final result = await firebaseAuthRemoteService.signInWithEmail(parameters);
-    return _sharedResult(result);
+    try {
+      return Right(result);
+    }on FirebaseAuthException catch (e){
+      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    }
   }
 
   @override
   Future<Either<FirebaseAuthException, UserCredential>> signInWithFacebook(NoParameter parameters) async {
     final result = await firebaseAuthRemoteService.signInWithFaceBook(parameters);
-    return _sharedResult(result);
+    try {
+      return Right(result);
+    }on FirebaseAuthException catch (e){
+      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    }
   }
 
   @override
   Future<Either<FirebaseAuthException, UserCredential>> signInWithGoogle(NoParameter parameters) async {
     final result = await firebaseAuthRemoteService.signInWithGoogle(parameters);
-    return _sharedResult(result);
+    try {
+      return Right(result);
+    }on FirebaseAuthException catch (e){
+      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    }
   }
 
   @override
@@ -60,7 +76,11 @@ class AuthRepository implements BaseAuthRepository {
   @override
   Future<Either<FirebaseAuthException, UserCredential>> signUpWithEmail(SignUpWithEmailParameter parameters) async {
     final result = await firebaseAuthRemoteService.signUpWithEmail(parameters);
-    return _sharedResult(result);
+    try {
+      return Right(result);
+    }on FirebaseAuthException catch (e){
+      return Left(FirebaseAuthException(code: e.code,message: e.message));
+    }
   }
 
   @override

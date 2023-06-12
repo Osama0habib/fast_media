@@ -1,7 +1,9 @@
+import 'package:fast_media/authentication/presentation/bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'package:fast_media/colors/colors.dart';
 import 'package:fast_media/syles/app_styles.dart';
-import 'package:fast_media/widgets/custom_text_field.dart';
+import 'package:fast_media/authentication/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgetPasswordForm extends StatelessWidget {
   const ForgetPasswordForm({
@@ -10,6 +12,7 @@ class ForgetPasswordForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<SignInBloc>();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
@@ -30,11 +33,13 @@ class ForgetPasswordForm extends StatelessWidget {
           ),
 
           // email textField
-          const CustomTextField(
+           CustomTextField(
             hint: 'Enter your email',
             keyboardType: TextInputType.emailAddress,
-            prefixIcon: Icon(Icons.email_outlined),
-          ),
+            prefixIcon: const Icon(Icons.email_outlined),
+            onchange:(String email) => bloc.add(EmailChangesEvent(email)),
+
+           ),
         ],
       ),
     );

@@ -14,7 +14,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
+  ).then((value) {
+    ServiceLocator().init();
+  });
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }

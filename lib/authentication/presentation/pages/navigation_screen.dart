@@ -1,5 +1,5 @@
 import 'package:fast_media/authentication/presentation/bloc/authentication_bloc/authentication_bloc.dart';
-import 'package:fast_media/authentication/presentation/pages/welcome_view.dart';
+import 'package:fast_media/authentication/presentation/pages/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +15,7 @@ class NavigationScreen extends StatelessWidget {
         if (state is AuthenticationSuccess) {
           return const HomeView();
         } else {
-          return const WelcomeView();
+          return const SplashView();
         }
       },
     );

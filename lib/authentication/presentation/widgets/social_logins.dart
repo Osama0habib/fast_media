@@ -1,6 +1,11 @@
+
+import 'dart:io';
+
+import 'package:fast_media/authentication/presentation/bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'package:fast_media/colors/colors.dart';
 import 'package:fast_media/syles/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SocialLogins extends StatelessWidget {
@@ -10,6 +15,7 @@ class SocialLogins extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<SignInBloc>();
     return Column(
       children: [
         Text('OR', style: AppStyles.heading_3.copyWith(color: kSeconderyColor)),
@@ -41,26 +47,37 @@ class SocialLogins extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              'assets/images/google.svg',
-              width: 28,
-              height: 28,
+            InkWell(
+              onTap: () => bloc.add(const GooglePressedEvent()),
+              child: SvgPicture.asset(
+                'assets/images/google.svg',
+                width: 28,
+                height: 28,
+              ),
             ),
             const SizedBox(
               width: 22,
             ),
-            SvgPicture.asset(
-              'assets/images/Facebook.svg',
-              width: 28,
-              height: 28,
+            InkWell(
+              onTap: () => bloc.add(const FaceBookPressedEvent()),
+              child: SvgPicture.asset(
+                'assets/images/Facebook.svg',
+                width: 28,
+                height: 28,
+              ),
             ),
-            const SizedBox(
+            if(Platform.isIOS || Platform.isIOS)
+              const SizedBox(
               width: 22,
             ),
-            SvgPicture.asset(
-              'assets/images/apple.svg',
-              width: 32,
-              height: 32,
+            if(Platform.isIOS || Platform.isIOS)
+            InkWell(
+              onTap: () => bloc.add(const ApplePressedEvent()),
+              child: SvgPicture.asset(
+                'assets/images/apple.svg',
+                width: 32,
+                height: 32,
+              ),
             ),
           ],
         ),

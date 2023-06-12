@@ -1,9 +1,10 @@
 import 'package:fast_media/syles/app_styles.dart';
-import 'package:fast_media/widgets/custom_appbar.dart';
-import 'package:fast_media/widgets/default_button.dart';
-import 'package:fast_media/widgets/forget_password_form.dart';
+import 'package:fast_media/authentication/presentation/widgets/custom_appbar.dart';
+import 'package:fast_media/authentication/presentation/widgets/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../widgets/forget_password_form.dart';
 
 class ForgetPasswordView extends StatelessWidget {
   const ForgetPasswordView({super.key});

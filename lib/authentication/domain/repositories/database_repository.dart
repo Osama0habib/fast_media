@@ -8,7 +8,7 @@ import '../use_cases/get_userdata_usecase.dart';
 import '../use_cases/save_userdata_usecase.dart';
 
 class DatabaseRepository implements BaseDatabaseRepository {
-  DatabaseRemoteDatasource databaseRemoteDatasource;
+  BaseDatabaseRemoteDataSource databaseRemoteDatasource;
   DatabaseRepository(this.databaseRemoteDatasource);
 
   @override

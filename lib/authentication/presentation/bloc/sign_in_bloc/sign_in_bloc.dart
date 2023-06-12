@@ -52,7 +52,7 @@ class SignInBloc extends Bloc<SignInEvent, FormsValidate> {
       emit(state.copyWith(isLoading: true));
       final result = await signInWithEmailUseCase(
         SignInWithEmailParameter(
-          email: state.password,
+          email: state.email,
           password: state.password,
         ),
       );
@@ -133,7 +133,7 @@ class SignInBloc extends Bloc<SignInEvent, FormsValidate> {
   FutureOr<void> _onPasswordChanged(
       PasswordChangesEvent event, Emitter<FormsValidate> emit) {
     emit(state.copyWith(
-      email: event.password,
+      password: event.password,
       isEmailValid: _isPasswordValid(event.password),
     ));
   }
