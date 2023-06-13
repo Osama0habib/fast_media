@@ -1,4 +1,5 @@
 import 'package:fast_media/authentication/presentation/bloc/authentication_bloc/authentication_bloc.dart';
+import 'package:fast_media/home/presentaion/pages/home_view.dart';
 import 'package:fast_media/colors/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: kSeconderyColor),
           useMaterial3: true,
         ),
-        home: const NavigationScreen(),
+        home: const HomeView(),
       ),
     );
   }

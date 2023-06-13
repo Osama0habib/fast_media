@@ -43,6 +43,7 @@ dependencies:
   formz: ^0.6.0
   get_it: ^7.6.0
   google_fonts: ^4.0.4
+  gradient_borders: ^1.0.0
   hive_flutter: ^1.1.0
   package_info_plus: ^4.0.2
 

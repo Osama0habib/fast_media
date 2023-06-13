@@ -4,11 +4,13 @@ abstract class AppStyles {
   static TextStyle heading_1 = const TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
+    color: Colors.white,
   );
 
   static TextStyle heading_2 = const TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w500,
+    color: Colors.white,
   );
   static TextStyle heading_3 = const TextStyle(
     fontSize: 16,

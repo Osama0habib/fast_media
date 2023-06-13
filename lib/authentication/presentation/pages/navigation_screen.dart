@@ -3,7 +3,7 @@ import 'package:fast_media/authentication/presentation/pages/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'home_view.dart';
+import '../../../home/presentaion/pages/home_view.dart';
 
 class NavigationScreen extends StatelessWidget {
   const NavigationScreen({Key? key}) : super(key: key);
