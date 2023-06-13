@@ -31,6 +31,7 @@ dependencies:
   cloud_firestore: ^4.8.0
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
+  device_preview: ^1.1.0
   dio: ^5.2.0+1
   equatable: ^2.0.5
   firebase_auth: ^4.6.2
@@ -46,6 +47,7 @@ dependencies:
   gradient_borders: ^1.0.0
   hive_flutter: ^1.1.0
   package_info_plus: ^4.0.2
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
