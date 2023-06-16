@@ -1,3 +1,4 @@
+import 'package:fast_media/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../syles/app_styles.dart';
@@ -11,35 +12,38 @@ class FavoritePage extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xff06081B),
-              Color(0xff4B3675),
-            ],
-            stops: [1, 1.0]
-        ),
+        gradient: kBackgroundGrediant,
       ),
       child: SafeArea(
         bottom: false,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-          SizedBox(height: 20,),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text("Favorite",style: AppStyles.heading_1.copyWith(color: Colors.white),),
-          ),
-          Text("Here you will find the movies that you liked",style: AppStyles.inActive12.copyWith(color: Colors.grey),),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 7,
-              // shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-             return const FavoriteItem();
-            },),
-          )
-        ],),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Favorite",
+                style: AppStyles.heading_1.copyWith(color: Colors.white),
+              ),
+            ),
+            Text(
+              "Here you will find the movies that you liked",
+              style: AppStyles.inActive12.copyWith(color: Colors.grey),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 7,
+                // shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                  return const FavoriteItem();
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

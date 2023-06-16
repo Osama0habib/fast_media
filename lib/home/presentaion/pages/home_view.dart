@@ -25,41 +25,37 @@ class HomeView extends StatelessWidget {
           print("building");
           final cubit = ctx.read<NavigationCubit>();
           // final cubit = BlocProvider.of<NavigationCubit>(context);
-          return
-            Scaffold(
-              extendBody: true,
-              body: cubit.widgets[cubit.currentIndex],
-              bottomNavigationBar: CircularBottomNavigation(
-                cubit.tabItems,
-                controller: cubit.controller,
-                selectedPos: cubit.currentIndex,
-                borderRadius:
-                const BorderRadius.vertical(top: Radius.circular(20)),
-                barHeight: 74,
-                circleSize: 64,
-                iconsSize: 20,
-                selectedIconColor: kSeconderyColor,
-                circleStrokeWidth: 0,
-                backgroundBoxShadow: null,
-                normalIconColor: Colors.white,
-                barBackgroundGradient: const LinearGradient(
-                  colors: [
-                    Color(0xff06081B),
-                    Color(0xff4B3675),
-                  ],
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-
-                  stops: [1.0, 1.5],
-                  // transform: GradientRotation(1z)
-                ),
-                selectedCallback: (int? selectedPos) {
-                  if (selectedPos != null) {
-                    cubit.selectPage(selectedPos);
-                  }
-                },
+          return Scaffold(
+            extendBody: true,
+            body: cubit.widgets[cubit.currentIndex],
+            bottomNavigationBar: CircularBottomNavigation(
+              cubit.tabItems,
+              controller: cubit.controller,
+              selectedPos: cubit.currentIndex,
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(20)),
+              barHeight: 74,
+              circleSize: 64,
+              iconsSize: 20,
+              selectedIconColor: kSeconderyColor,
+              circleStrokeWidth: 0,
+              backgroundBoxShadow: null,
+              normalIconColor: Colors.white,
+              barBackgroundGradient: const LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xff06081B),
+                  Color(0xff4B3675),
+                ],
               ),
-            );
+              selectedCallback: (int? selectedPos) {
+                if (selectedPos != null) {
+                  cubit.selectPage(selectedPos);
+                }
+              },
+            ),
+          );
         },
       ),
     );

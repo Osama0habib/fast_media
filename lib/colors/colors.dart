@@ -14,15 +14,3 @@ const kBackgroundGrediant = LinearGradient(
     Color(0xff4B3675),
   ],
 );
-
-const Gradient kGradient = LinearGradient(
-  colors: [
-    Color(0xff06081B),
-    Color(0xff4B3675),
-  ],
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-  tileMode: TileMode.repeated,
-    // stops: [0.6,0.9,0.0]
-  // stops: [1.0, 0.5],
-);

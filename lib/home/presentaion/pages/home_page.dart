@@ -1,3 +1,4 @@
+import 'package:fast_media/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/coming_soon.dart';
@@ -13,26 +14,18 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xff06081B),
-              Color(0xff4B3675),
-            ],
-            stops: [1, 1.0]
-        ),
+        gradient: kBackgroundGrediant,
       ),
-      child: SafeArea(
+      child: const SafeArea(
         bottom: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const HomeAppBar(),
+            HomeAppBar(),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
-                  children: const [
+                  children: [
                     SizedBox(
                       height: 22.0,
                     ),
@@ -50,7 +43,7 @@ class HomePage extends StatelessWidget {
                     ),
                     RecommendedListView(),
                     SizedBox(
-                      height: 32,
+                      height: 120,
                     ),
                   ],
                 ),
