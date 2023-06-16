@@ -16,3 +16,13 @@ class AuthenticationSignedOut extends AuthenticationEvent {
   @override
   List<Object> get props => [];
 }
+
+class GetUSerDataEvent extends AuthenticationEvent {
+  final String id;
+
+  const GetUSerDataEvent(this.id);
+
+  @override
+  List<Object> get props => [id];
+
+}

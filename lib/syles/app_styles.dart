@@ -12,6 +12,13 @@ abstract class AppStyles {
     fontWeight: FontWeight.w500,
     color: Colors.white,
   );
+
+  static TextStyle medium_10 = const TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  );
+
   static TextStyle heading_3 = const TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w500,

@@ -27,7 +27,7 @@ class SignInBloc extends Bloc<SignInEvent, FormsValidate> {
   final SignInWithGoogleUseCase signInWithGoogleUseCase;
   final SignInWithFaceBookUseCase signInWithFaceBookUseCase;
   final SignInWithAppleUseCase signInWithAppleUseCase;
-  final GetUserDataUseCase getUserDataUseCase;
+  // final GetUserDataUseCase getUserDataUseCase;
   final SaveUserDataUseCase saveUserDataUseCase;
   final ForgetPasswordUseCase forgetPasswordUseCase;
 
@@ -36,7 +36,7 @@ class SignInBloc extends Bloc<SignInEvent, FormsValidate> {
     this.signInWithGoogleUseCase,
     this.signInWithFaceBookUseCase,
     this.signInWithAppleUseCase,
-    this.getUserDataUseCase,
+    // this.getUserDataUseCase,
     this.saveUserDataUseCase,
     this.forgetPasswordUseCase,
   ) : super(const FormsValidate()) {
@@ -48,7 +48,7 @@ class SignInBloc extends Bloc<SignInEvent, FormsValidate> {
     on<RememberMePressedEvent>(_rememberMe);
     on<EmailChangesEvent>(_onEmailChanged);
     on<PasswordChangesEvent>(_onPasswordChanged);
-    on<GetUSerDataEvent>(_getUserData);
+    // on<GetUSerDataEvent>(_getUserData);
     on<SaveUserDataEvent>(_saveUserData);
     on<ForgetPasswordEvent>(_forgetPassword);
   }
@@ -89,6 +89,7 @@ class SignInBloc extends Bloc<SignInEvent, FormsValidate> {
               ),
             ), (r) async {
       if (r.additionalUserInfo!.isNewUser) {
+        print("currentUser : $r");
         final userData = UserModel(
             uid: r.user!.uid,
             imageUrl: r.user?.photoURL,
@@ -198,17 +199,17 @@ class SignInBloc extends Bloc<SignInEvent, FormsValidate> {
   }
 
   /// ToDo : it shoud be saved in localDatabase Hive
-  Future<FutureOr<void>> _getUserData(
-      GetUSerDataEvent event, Emitter<FormsValidate> emit) async {
-    final result = await getUserDataUseCase(
-      GetUserDataParameter(
-        id: event.id,
-      ),
-    );
-    result.fold(
-        (l) => emit(state.copyWith(isLoading: false, errorMessage: l.message)),
-        (r) => emit(state.copyWith(isLoading: false)));
-  }
+  // Future<FutureOr<void>> _getUserData(
+  //     GetUSerDataEvent event, Emitter<FormsValidate> emit) async {
+  //   final result = await getUserDataUseCase(
+  //     GetUserDataParameter(
+  //       id: event.id,
+  //     ),
+  //   );
+  //   result.fold(
+  //       (l) => emit(state.copyWith(isLoading: false, errorMessage: l.message)),
+  //       (r) => emit(state.copyWith(isLoading: false)));
+  // }
 
   String? validationText() {
     if (state.isEmailValid && state.isPasswordValid) {

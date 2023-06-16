@@ -7,7 +7,7 @@ class DefaultButton extends StatelessWidget {
     super.key,
     required this.btnText,
     this.color,
-    this.isLoading = false,
+    this.style,
     this.fill = true,
     required this.onPressed,
   });
@@ -15,14 +15,12 @@ class DefaultButton extends StatelessWidget {
   final String btnText;
   final Color? color;
   final bool fill;
-  final bool isLoading;
+  final TextStyle? style;
   final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? const CircularProgressIndicator.adaptive()
-        : MaterialButton(
+    return  MaterialButton(
             onPressed: onPressed,
             color: fill ? color ?? kSeconderyColor : null,
             height: 58,
@@ -37,7 +35,7 @@ class DefaultButton extends StatelessWidget {
             ),
             child: Text(
               btnText,
-              style: AppStyles.heading_2.copyWith(
+              style: style ?? AppStyles.heading_2.copyWith(
                 color: Colors.white,
               ),
             ),

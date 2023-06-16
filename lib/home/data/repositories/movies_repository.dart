@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:fast_media/home/domain/usecases/get_trending_movies_usecase.dart';
 
 
 import '../../../core/error/exceptions.dart';
@@ -9,7 +10,6 @@ import '../../domain/entities/recommendation.dart';
 import '../../domain/repository/base_movies_repository.dart';
 import '../../domain/usecases/get_movie_details_usecase.dart';
 import '../../domain/usecases/get_movie_recommendation_usecase.dart';
-import '../../domain/usecases/get_popluar_movies_usecase.dart';
 import '../../domain/usecases/get_top_rated_movies_usecase.dart';
 import '../data_sources/remote_data_source/remote_movie_data_source.dart';
 
@@ -25,7 +25,7 @@ class MoviesRepository extends BaseMoviesRepository {
   }
 
   @override
-  Future<Either<Failure, List<Movie>>> getTrendingMovies(PopularMoviesPageParameter parameter) async {
+  Future<Either<Failure, List<Movie>>> getTrendingMovies(TrendingMoviesPageParameter parameter) async {
     final result = await baseMovieRemoteDataSource.getTrendingMovies(parameter);
     return sharedResult(result);
   }

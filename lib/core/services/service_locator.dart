@@ -20,29 +20,40 @@ import 'package:fast_media/authentication/domain/use_cases/verify_email_usecase.
 import 'package:fast_media/authentication/domain/use_cases/verify_password_reset_code_usecase.dart';
 import 'package:fast_media/authentication/presentation/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:fast_media/authentication/presentation/bloc/sign_up_bloc/sign_up_bloc.dart';
+import 'package:fast_media/home/domain/usecases/get_top_rated_movies_usecase.dart';
+import 'package:fast_media/home/domain/usecases/get_trending_movies_usecase.dart';
+import 'package:fast_media/home/domain/usecases/get_up_coming_movies_usecase.dart';
+import 'package:fast_media/home/presentaion/bloc/home_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../authentication/presentation/bloc/sign_in_bloc/sign_in_bloc.dart';
+import '../../home/data/data_sources/remote_data_source/remote_movie_data_source.dart';
+import '../../home/data/repositories/movies_repository.dart';
+import '../../home/domain/repository/base_movies_repository.dart';
 
 
 final sl = GetIt.instance;
 class ServiceLocator {
   void init(){
     /// Bloc
-    sl.registerFactory(() => AuthenticationBloc(sl(),sl()));
-    sl.registerFactory(() => SignInBloc(sl(),sl(),sl(),sl(),sl(),sl(),sl()));
+    sl.registerFactory(() => AuthenticationBloc(sl(),sl(),sl()));
+    sl.registerFactory(() => SignInBloc(sl(),sl(),sl(),sl(),sl(),sl()));
     sl.registerFactory(() => SignUpBloc(sl(), sl()));
+    sl.registerFactory(() => HomeBloc(sl(),sl(),sl()));
 
 
     /// Remote DataSource
     sl.registerLazySingleton<BaseFirebaseAuthRemoteDataSource>(() => FirebaseAuthRemoteService());
     sl.registerLazySingleton<BaseDatabaseRemoteDataSource>(() => DatabaseRemoteDatasource());
+    sl.registerLazySingleton<BaseMovieRemoteDataSource>(() => MovieRemoteDataSource());
+
 
     /// Repository
     sl.registerLazySingleton<BaseAuthRepository>(() => AuthRepository());
     sl.registerLazySingleton<BaseDatabaseRepository>(() => DatabaseRepository(sl()));
+    sl.registerLazySingleton<BaseMoviesRepository>(() => MoviesRepository(sl()));
 
 
     /// Usecases
@@ -58,6 +69,10 @@ class ServiceLocator {
     sl.registerLazySingleton(() => SignUpWithEmailUseCase(sl()));
     sl.registerLazySingleton(() => VerifyEmailUseCase(sl()));
     sl.registerLazySingleton(() => VerifyPasswordCodeUseCase(sl()));
+    sl.registerLazySingleton(() => GetUpComingMoviesUseCase(sl()));
+    sl.registerLazySingleton(() => GetTrendingMoviesUseCase(sl()));
+    sl.registerLazySingleton(() => GetTopRatedMoviesUseCase(sl()));
+
 
     //
     // sl.registerSingletonAsync<PackageInfo>(() async => await PackageInfo.fromPlatform());

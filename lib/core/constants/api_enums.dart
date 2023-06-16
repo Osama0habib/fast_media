@@ -1,4 +1,5 @@
 enum Category{all,movie,person,tv}
+enum RequestState { loading, loaded, error }
 
 
 /// The genres currently available in the movie section are:
