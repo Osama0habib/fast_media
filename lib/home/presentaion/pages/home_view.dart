@@ -1,3 +1,4 @@
+import 'package:fast_media/colors/colors.dart';
 import 'package:fast_media/home/presentaion/widgets/coming_soon.dart';
 import 'package:fast_media/home/presentaion/widgets/recommended_listview.dart';
 import 'package:fast_media/home/presentaion/widgets/trending_listview.dart';
@@ -13,14 +14,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xff06081B),
-              Color(0xff4B3675),
-            ],
-          ),
+          gradient: kBackgroundGrediant,
         ),
         child: const SafeArea(
           child: Column(
