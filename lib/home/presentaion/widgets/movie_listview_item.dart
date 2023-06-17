@@ -1,4 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_media/colors/colors.dart';
+import 'package:fast_media/core/constants/api_constants.dart';
+import 'package:fast_media/home/domain/entities/movie.dart';
 import 'package:fast_media/home/presentaion/pages/details_view.dart';
 import 'package:fast_media/syles/app_styles.dart';
 import 'package:flutter/material.dart';
@@ -6,13 +9,12 @@ import 'package:flutter/material.dart';
 class MovieListViewItem extends StatelessWidget {
   const MovieListViewItem({
     super.key,
+    required this.movie,
     required this.index,
-    required this.imageUrl,
-    required this.movieTitle,
   });
+
+  final Movie movie;
   final int index;
-  final String imageUrl;
-  final String movieTitle;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,7 +23,9 @@ class MovieListViewItem extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const DetailsView(),
+              builder: (context) => DetailsView(
+                movie: movie,
+              ),
             ),
           );
         },
@@ -31,13 +35,14 @@ class MovieListViewItem extends StatelessWidget {
             Expanded(
               child: AspectRatio(
                 aspectRatio: 2 / 3,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30.0),
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        imageUrl,
-                      ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30.0),
+                  child: CachedNetworkImage(
+                    imageUrl: ApiConstant.imageUrl(
+                        path: movie.posterPath, quality: 'w500'),
+                    progressIndicatorBuilder: (context, url, progress) =>
+                        const Center(
+                      child: CircularProgressIndicator.adaptive(),
                     ),
                   ),
                 ),
@@ -52,7 +57,7 @@ class MovieListViewItem extends StatelessWidget {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.25,
               child: Text(
-                movieTitle,
+                movie.title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,

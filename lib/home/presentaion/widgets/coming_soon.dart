@@ -97,8 +97,9 @@ class _ComingSoonListViewState extends State<ComingSoonListView> {
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: NetworkImage(
-                                      ApiConstant.imageUrl(state
-                                          .upComingMovies[index].backdropPath),
+                                      ApiConstant.imageUrl(
+                                          path: state.upComingMovies[index]
+                                              .backdropPath),
                                     ),
                                   ),
                                 ),

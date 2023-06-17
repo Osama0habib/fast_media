@@ -1,5 +1,4 @@
 import 'package:fast_media/colors/colors.dart';
-import 'package:fast_media/core/constants/api_constants.dart';
 import 'package:fast_media/core/constants/api_enums.dart';
 import 'package:fast_media/home/presentaion/bloc/home_bloc.dart';
 import 'package:fast_media/home/presentaion/widgets/movie_listview_item.dart';
@@ -66,10 +65,7 @@ class RecommendedListView extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return MovieListViewItem(
                         index: index,
-                        imageUrl: ApiConstant.imageUrl(
-                          state.topRatedMovies[index].posterPath,
-                        ),
-                        movieTitle: state.topRatedMovies[index].title,
+                        movie: state.topRatedMovies[index],
                       );
                     },
                   ),

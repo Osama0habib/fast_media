@@ -73,9 +73,7 @@ class TrendingListView extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return MovieListViewItem(
                         index: index,
-                        movieTitle: state.trendingMovies[index].title,
-                        imageUrl: ApiConstant.imageUrl(
-                            state.upComingMovies[index].posterPath),
+                        movie: state.trendingMovies[index],
                       );
                     },
                   ),

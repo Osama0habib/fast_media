@@ -1,3 +1,4 @@
+import 'package:fast_media/home/domain/entities/movie.dart';
 import 'package:fast_media/home/presentaion/widgets/movie_cast.dart';
 import 'package:fast_media/home/presentaion/widgets/movie_overview.dart';
 import 'package:fast_media/home/presentaion/widgets/reviews_listview.dart';
@@ -6,32 +7,35 @@ import 'package:flutter/material.dart';
 class MovieDetailsBody extends StatelessWidget {
   const MovieDetailsBody({
     super.key,
+    required this.movie,
   });
-
+  final Movie movie;
   @override
   Widget build(BuildContext context) {
     return Column(
-      children:const [
-        SizedBox(
+      children: [
+        const SizedBox(
           height: 48.0,
         ),
 
         // Detials
-        MovieOverview(),
-        SizedBox(
+        MovieOverview(
+          movieOverView: movie.overview,
+        ),
+        const SizedBox(
           height: 22.0,
         ),
 
         //cast listview
-        MovieCast(),
-        SizedBox(
+        const MovieCast(),
+        const SizedBox(
           height: 22.0,
         ),
 
         //Reviews
-        ReviewsListView(),
+        const ReviewsListView(),
         SizedBox(
-          height: 28.0,
+          height: MediaQuery.of(context).size.height * 0.2,
         ),
       ],
     );
