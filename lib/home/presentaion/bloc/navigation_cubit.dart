@@ -26,20 +26,24 @@ class NavigationCubit extends Cubit<NavigationState> {
   List<TabItem> tabItems = List.of([
     TabItem(
       Icons.home_outlined,
-      "Home",
+      "",
       kBackgroundGrediant,
     ),
     TabItem(
       Icons.favorite_border_outlined,
-      "Search",
+      "",
       kBackgroundGrediant,
     ),
     TabItem(
       Icons.search_outlined,
-      "Reports",
+      "",
       kBackgroundGrediant,
     ),
-    TabItem(Icons.settings_outlined, "Notifications", kBackgroundGrediant),
+    TabItem(
+      Icons.settings_outlined,
+      "",
+      kBackgroundGrediant,
+    ),
   ]);
 
   void selectPage(int page) {

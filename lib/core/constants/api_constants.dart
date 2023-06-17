@@ -7,9 +7,17 @@ class ApiConstant {
   static const String baseImageUrl = "https://image.tmdb.org/t/p/w500";
   static String imageUrl(String path) => "$baseImageUrl$path";
   // static String trending(Category category) => "$baseUrl/trending/${category.name.split(".").last}?api_key=$apiKey";
-  static String trendingMoviesPath(int page,Category category) => "$baseUrl/trending/${category.name.split(".").last}/week?page=$page&api_key=$apiKey";
-  static String movieDetailsPath(int id) => "$baseUrl/movie/$id?api_key=$apiKey&append_to_response=videos" ;
-  static String getReviews(int id , Category category) => "$baseUrl/${category.name.split(".").last}/$id/reviews";
-  static String moviesWithGenres(Category category) => "$baseUrl/discover/${category.name.split(".").last}?api_key=$apiKey";
+  static String trendingMoviesPath(int page, Category category) =>
+      "https://api.themoviedb.org/3/trending/${category.name.split('.').last}/day?api_key=$apiKey";
+  // فيه غلط هنا وانا كتبت اللي فوق دا بداله
+  // static String trendingMoviesPath(int page,Category category) => "$baseUrl/trending/${category.name.split(".").last}/week?page=$page&api_key=$apiKey";
+  static String movieDetailsPath(int id) =>
+      "$baseUrl/movie/$id?api_key=$apiKey&append_to_response=videos";
+  static String getReviews(int id, Category category) =>
+      "$baseUrl/${category.name.split(".").last}/$id/reviews";
+  static String moviesWithGenres(Category category) =>
+      "$baseUrl/discover/${category.name.split(".").last}?api_key=$apiKey";
 
+  static String topRatedMoviewPath =
+      'https://api.themoviedb.org/3/movie/top_rated?api_key=$apiKey';
 }

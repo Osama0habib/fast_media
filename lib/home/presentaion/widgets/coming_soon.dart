@@ -33,14 +33,16 @@ class _ComingSoonListViewState extends State<ComingSoonListView> {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       buildWhen: (HomeState previous, HomeState current) {
-       return previous.upComingRequestState == RequestState.loading || current.upComingRequestState == RequestState.loaded || current.upComingError.isNotEmpty;
+        return previous.upComingRequestState == RequestState.loading ||
+            current.upComingRequestState == RequestState.loaded ||
+            current.upComingError.isNotEmpty;
       },
-  builder: (context, state) {
-
-        switch(state.upComingRequestState){
-
+      builder: (context, state) {
+        switch (state.upComingRequestState) {
           case RequestState.loading:
-            return const Center(child: CircularProgressIndicator.adaptive(),);
+            return const Center(
+              child: CircularProgressIndicator.adaptive(),
+            );
           case RequestState.loaded:
             print("lenght : ${state.upComingMovies.length}");
             return Padding(
@@ -60,7 +62,8 @@ class _ComingSoonListViewState extends State<ComingSoonListView> {
                         onTap: () {},
                         child: Text(
                           'View All  >',
-                          style: AppStyles.inActive14.copyWith(color: kSeconderyColor),
+                          style: AppStyles.inActive14
+                              .copyWith(color: kSeconderyColor),
                         ),
                       ),
 
@@ -91,10 +94,11 @@ class _ComingSoonListViewState extends State<ComingSoonListView> {
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(24.0),
-                                  image:  DecorationImage(
+                                  image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: NetworkImage(
-                                      ApiConstant.imageUrl(state.upComingMovies[index].backdropPath),
+                                      ApiConstant.imageUrl(state
+                                          .upComingMovies[index].backdropPath),
                                     ),
                                   ),
                                 ),
@@ -135,7 +139,8 @@ class _ComingSoonListViewState extends State<ComingSoonListView> {
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: constraints.maxWidth * 0.065,
+                                            fontSize:
+                                                constraints.maxWidth * 0.065,
                                           ),
                                         ),
                                       ),
@@ -162,10 +167,11 @@ class _ComingSoonListViewState extends State<ComingSoonListView> {
                                           size: constraints.maxHeight * 0.15,
                                         ),
                                         Text(
-                                          '8.8',
+                                          '${state.upComingMovies[index].voteAverage}',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: constraints.maxHeight * 0.13,
+                                            fontSize:
+                                                constraints.maxHeight * 0.13,
                                           ),
                                         )
                                       ],
@@ -198,9 +204,11 @@ class _ComingSoonListViewState extends State<ComingSoonListView> {
               ),
             );
           case RequestState.error:
-           return Center(child: Text(state.upComingError),);
+            return Center(
+              child: Text(state.upComingError),
+            );
         }
-  },
-);
+      },
+    );
   }
 }

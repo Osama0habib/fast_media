@@ -28,15 +28,13 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  bloc: ^8.1.2
   cached_network_image: ^3.2.3
   circular_bottom_navigation:
     git:
       url: https://github.com/Osama0habib/circular_bottom_navigation.git
-#  awesome_bottom_bar: ^1.2.2
-#  circle_nav_bar: ^2.0.1+1
   cloud_firestore: ^4.8.0
   cupertino_icons: ^1.0.2
-#  curved_navigation_bar: ^1.0.3
   dartz: ^0.10.1
   device_preview: ^1.1.0
   dio: ^5.2.0+1

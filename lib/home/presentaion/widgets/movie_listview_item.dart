@@ -49,10 +49,16 @@ class MovieListViewItem extends StatelessWidget {
             ),
 
             //title
-            Text(
-              movieTitle,
-              style: AppStyles.heading_3.copyWith(
-                color: index % 2 == 0 ? kWireframe_1 : Colors.white,
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.25,
+              child: Text(
+                movieTitle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: AppStyles.heading_3.copyWith(
+                  color: index % 2 == 0 ? kWireframe_1 : Colors.white,
+                ),
               ),
             )
           ],

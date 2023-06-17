@@ -23,7 +23,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetTrendingMoviesUseCase getTrendingMoviesUseCase;
   final GetTopRatedMoviesUseCase getTopRatedMoviesUseCase;
 
-  HomeBloc(this.getUpComingMoviesUseCase, this.getTrendingMoviesUseCase, this.getTopRatedMoviesUseCase)
+  HomeBloc(this.getUpComingMoviesUseCase, this.getTrendingMoviesUseCase,
+      this.getTopRatedMoviesUseCase)
       : super(const HomeState()) {
     on<GetHomeMoviesEvent>(_getHomeMovies);
     on<GetUpComingMoviesEvent>(_getUpComingMovies);
@@ -52,37 +53,40 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     print("getUpComing");
     final result = await getUpComingMoviesUseCase(const NoParameter());
     result.fold(
-            (l) => emit(state.copyWith(
+        (l) => emit(state.copyWith(
             upComingRequestState: RequestState.error,
             upComingError: l.message)),
-            (r) => emit(state.copyWith(
-            upComingRequestState: RequestState.loaded,
-            upComingMovies: r)));
+        (r) => emit(state.copyWith(
+            upComingRequestState: RequestState.loaded, upComingMovies: r)));
   }
 
-  Future<FutureOr<void>> _getTopRatedMovies(GetTopRatedMoviesEvent event, Emitter<HomeState> emit) async {
+  Future<FutureOr<void>> _getTopRatedMovies(
+      GetTopRatedMoviesEvent event, Emitter<HomeState> emit) async {
     print("getTopRated");
-    final result = await getTopRatedMoviesUseCase(const TopRatedMoviesPageParameter(page: 0));
+    final result = await getTopRatedMoviesUseCase(
+        const TopRatedMoviesPageParameter(page: 0));
     result.fold(
-            (l) => emit(state.copyWith(
+        (l) => emit(state.copyWith(
             topRatedMoviesRequestState: RequestState.error,
             topRatedMoviesError: l.message)),
-            (r) => emit(state.copyWith(
+        (r) => emit(state.copyWith(
             topRatedMoviesRequestState: RequestState.loaded,
             topRatedMovies: r)));
   }
 
-  FutureOr<void> _getHomeMovies(GetHomeMoviesEvent event, Emitter<HomeState> emit) {
+  FutureOr<void> _getHomeMovies(
+      GetHomeMoviesEvent event, Emitter<HomeState> emit) {
     add(const GetUpComingMoviesEvent());
     add(const GetTrendingMoviesEvent());
     add(const GetTopRatedMoviesEvent());
   }
 
-
-
-
-  Future<FutureOr<void>> _addToFavorite(AddToFavoriteEvent event, Emitter<HomeState> emit) async {
-
-    final result = await FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser?.uid).collection("favorite").add(FavoriteModel.fromMovieModel(event.movie).toDoc());
+  Future<FutureOr<void>> _addToFavorite(
+      AddToFavoriteEvent event, Emitter<HomeState> emit) async {
+    final result = await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .collection("favorite")
+        .add(FavoriteModel.fromMovieModel(event.movie).toDoc());
   }
 }
