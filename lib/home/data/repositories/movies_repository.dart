@@ -1,5 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:fast_media/home/domain/entities/cast.dart';
+import 'package:fast_media/home/domain/entities/reviews.dart';
+import 'package:fast_media/home/domain/usecases/get_cast_usecase.dart';
+import 'package:fast_media/home/domain/usecases/get_reviews_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_trending_movies_usecase.dart';
+import 'package:fast_media/home/domain/usecases/get_video_usecase.dart';
 
 
 import '../../../core/error/exceptions.dart';
@@ -58,6 +63,36 @@ class MoviesRepository extends BaseMoviesRepository {
   @override
   Future<Either<Failure, List<Recommendation>>> getMovieRecommendation(MovieRecommendationParameter parameter) async {
     final result = await baseMovieRemoteDataSource.getMovieRecommendation(parameter);
+    try {
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Cast>>> getCast(CastParameter parameter) async {
+    final result = await baseMovieRemoteDataSource.getCast(parameter);
+    try {
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Reviews>>> getReviews(ReviewsParameter parameter) async {
+    final result = await baseMovieRemoteDataSource.getReviews(parameter);
+    try {
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> getVideo(VideoParameter parameter) async {
+    final result = await baseMovieRemoteDataSource.getVideo(parameter);
     try {
       return Right(result);
     } on ServerException catch (failure) {

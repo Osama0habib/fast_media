@@ -2,19 +2,27 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_media/colors/colors.dart';
 import 'package:fast_media/core/constants/api_constants.dart';
 import 'package:fast_media/home/domain/entities/movie.dart';
+import 'package:fast_media/home/presentaion/bloc/movie_details_bloc.dart';
+import 'package:fast_media/home/presentaion/pages/watch_screen.dart';
 import 'package:fast_media/home/presentaion/widgets/movie_actions_row.dart';
 import 'package:fast_media/syles/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MovieDetailsSliverAppBar extends StatelessWidget {
   const MovieDetailsSliverAppBar({
     super.key,
     required this.movie,
   });
+
   final Movie movie;
+
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery.of(context).size.height;
+    double h = MediaQuery
+        .of(context)
+        .size
+        .height;
     return SliverAppBar(
       actions: const [
         Icon(
@@ -49,11 +57,19 @@ class MovieDetailsSliverAppBar extends StatelessWidget {
 
 class FlexibleSpaceBarBackground extends StatelessWidget {
   const FlexibleSpaceBarBackground({super.key, required this.movie});
+
   final Movie movie;
+
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+    double w = MediaQuery
+        .of(context)
+        .size
+        .width;
+    double h = MediaQuery
+        .of(context)
+        .size
+        .height;
 
     return Stack(
       clipBehavior: Clip.none,
@@ -62,7 +78,7 @@ class FlexibleSpaceBarBackground extends StatelessWidget {
         CachedNetworkImage(
           imageUrl: ApiConstant.imageUrl(path: movie.backdropPath),
           progressIndicatorBuilder: (context, url, progress) =>
-              const Center(child: CircularProgressIndicator.adaptive()),
+          const Center(child: CircularProgressIndicator.adaptive()),
           fit: BoxFit.cover,
           alignment: Alignment.topCenter,
           width: w,
@@ -123,14 +139,27 @@ class FlexibleSpaceBarBackground extends StatelessWidget {
                   ),
 
                   //play button
-                  IconButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.play_circle,
-                      color: kSeconderyColor,
-                      size: w * 0.2,
-                    ),
+                  BlocBuilder<MovieDetailsBloc, MovieDetailsState>(
+                    builder: (context, state) {
+                      return IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  WatchScreen(
+                                    videoId:state.videoId,
+                                  ),
+                            ),
+                          );
+                        },
+                        icon: Icon(
+                          Icons.play_circle,
+                          color: kSeconderyColor,
+                          size: w * 0.2,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

@@ -16,16 +16,16 @@ class HomePage extends StatelessWidget {
       decoration: const BoxDecoration(
         gradient: kBackgroundGrediant,
       ),
-      child: const SafeArea(
+      child:  SafeArea(
         bottom: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            HomeAppBar(),
+            const HomeAppBar(),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
-                  children: [
+                  children:const [
                     SizedBox(
                       height: 22.0,
                     ),

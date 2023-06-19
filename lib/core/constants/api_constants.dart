@@ -15,7 +15,10 @@ class ApiConstant {
   static String movieDetailsPath(int id) =>
       "$baseUrl/movie/$id?api_key=$apiKey&append_to_response=videos";
   static String getReviews(int id, Category category) =>
-      "$baseUrl/${category.name.split(".").last}/$id/reviews";
+      "$baseUrl/${category.name.split(".").last}/$id/reviews?api_key=$apiKey";
+  static String getCast(int movieId, Category category) => "$baseUrl/${category.name.split(".").last}/$movieId/credits?api_key=$apiKey";
+  static String getVideos(int movieId, Category category) => "$baseUrl/${category.name.split(".").last}/$movieId/videos?api_key=$apiKey";
+
   static String moviesWithGenres(Category category) =>
       "$baseUrl/discover/${category.name.split(".").last}?api_key=$apiKey";
 

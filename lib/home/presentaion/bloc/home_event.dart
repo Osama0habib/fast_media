@@ -39,3 +39,5 @@ class AddToFavoriteEvent extends HomeEvent {
   @override
   List<Object> get props => [movie];
 }
+
+

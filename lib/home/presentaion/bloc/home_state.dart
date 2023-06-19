@@ -36,6 +36,7 @@ class HomeState extends Equatable {
         topRatedMoviesRequestState ?? this.topRatedMoviesRequestState,
         topRatedMoviesError:
         topRatedMoviesError ?? this.topRatedMoviesError,
+
       );
 
   const HomeState({this.upComingMovies = const [],
