@@ -6,10 +6,21 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        SelectCategory(),
-      ],
+    return SafeArea(
+      child: Column(
+        children:  [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24,vertical: 24),
+            child: Row(
+              children: [
+                 const Expanded(child: SearchBar(trailing: [Icon(Icons.mic)],leading: Icon(Icons.search),)),
+                IconButton(onPressed: (){}, icon: const Icon(Icons.filter_vintage_rounded)),
+              ],
+            ),
+          ),
+          SelectCategory(),
+        ],
+      ),
     );
   }
 }

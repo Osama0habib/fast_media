@@ -36,7 +36,12 @@ class VideoControls extends StatelessWidget {
           child: Row(mainAxisSize: MainAxisSize.min, children: [
             // AnimatedIcon(icon: AnimatedIcons.play_pause, progress: animation),
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  if(state.isPlaying) {
+
+                    state.youtubePlayerController?.pause();
+                  }
+                },
                 icon: Icon(state.isPlaying ? Icons.pause : Icons.play_arrow,size: 18,)),
             Expanded(
               child: ProgressBar(
@@ -83,14 +88,17 @@ class VideoControls extends StatelessWidget {
               height: 32.0,
               width: 32.0,
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                  },
                   icon: const Icon(Icons.settings,size: 16,)),
             ),
             SizedBox(
               height: 32.0,
               width: 32.0,
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    state.youtubePlayerController?.toggleFullScreenMode();
+                  },
                   icon: const Icon(Icons.fullscreen,size: 16,)),
             ),
           ]),

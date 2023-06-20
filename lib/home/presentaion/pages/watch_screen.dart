@@ -37,9 +37,11 @@ class WatchScreen extends StatelessWidget {
                           [DeviceOrientation.portraitUp]);
                     },
                     player: YoutubePlayer(
+
                       controller: state.youtubePlayerController!,
-                      showVideoProgressIndicator: true,
-                      progressIndicatorColor: Colors.blueAccent,
+                      // showVideoProgressIndicator: true,
+                      // progressIndicatorColor: Colors.blueAccent,
+                      bottomActions: [],
                       topActions: <Widget>[
                         const SizedBox(width: 8.0),
                         IconButton(
@@ -67,7 +69,8 @@ class WatchScreen extends StatelessWidget {
                       //   state.youtubePlayerController
                       //       !.addListener(listener);
                       // },
-                      onEnded: (data) {},
+                      onEnded: (data) {
+                      },
                     ),
                     onEnterFullScreen: () {
                       context.read<VideoPlayerBloc>().add(EnterFullScreen());

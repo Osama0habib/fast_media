@@ -5,7 +5,6 @@ import 'package:fast_media/syles/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../../core/constants/api_constants.dart';
 import '../../../core/constants/api_enums.dart';
