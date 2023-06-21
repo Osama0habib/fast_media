@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:fast_media/core/constants/api_constants.dart';
 import 'package:fast_media/core/constants/api_enums.dart';
 import 'package:fast_media/home/domain/entities/reviews.dart';
+import 'package:fast_media/home/domain/usecases/add_to_favorite.dart';
 import 'package:fast_media/home/domain/usecases/get_cast_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_reviews_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_video_usecase.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import '../../../../core/error/error_message_model.dart';
 import '../../../../core/error/exceptions.dart';
@@ -34,6 +38,8 @@ abstract class BaseMovieRemoteDataSource {
       ReviewsParameter parameter);
   Future<String> getVideo(
       VideoParameter parameter);
+  Future<void> addToFavorite(AddToFavoriteParameter parameter);
+  Future<List<MovieDetailsModel>> getFavorite(AddToFavoriteParameter parameter);
 }
 
 class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
@@ -83,7 +89,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
   Future<MovieDetailsModel> getMovieDetails(
       MovieDetailsParameter parameter) async {
     final response =
-        await Dio().get(ApiConstant.movieDetailsPath(parameter.movieId));
+        await Dio().get(ApiConstant.movieDetailsPath(parameter.movieId,Category.movie));
     if (response.statusCode == 200) {
       return MovieDetailsModel.fromJson(response.data);
     } else {
@@ -139,6 +145,35 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
     } else {
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJson(response.data));
+    }
+  }
+
+  @override
+  Future<void> addToFavorite(AddToFavoriteParameter parameter) async {
+    try {
+       await FirebaseFirestore.instance.collection("Users").doc(
+          FirebaseAuth.instance.currentUser?.uid).collection("favorite").add(
+          {"movieID": parameter.movieId});
+    }on FirebaseException catch(e){
+      throw FirebaseException(plugin: e.plugin,stackTrace: e.stackTrace,code: e.code,message: e.message);
+    }
+  }
+
+  @override
+  Future<List<MovieDetailsModel>> getFavorite(AddToFavoriteParameter parameter) async {
+    List<MovieDetailsModel> favList = [];
+    try {
+     final response = await FirebaseFirestore.instance.collection("Users").doc(
+          FirebaseAuth.instance.currentUser?.uid).collection("favorite").get();
+     response.docs.forEach((element) async {
+    final int movieId =element.get("movieID");
+    final MovieDetailsModel movie = await getMovieDetails(MovieDetailsParameter(movieId: movieId));
+    favList.add(movie);
+      });
+      return List<MovieDetailsModel>.from(favList).toList();
+
+    }on FirebaseException catch(e){
+      throw FirebaseException(plugin: e.plugin,stackTrace: e.stackTrace,code: e.code,message: e.message);
     }
   }
 }

@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:fast_media/home/domain/entities/reviews.dart';
+import 'package:fast_media/home/domain/usecases/add_to_favorite.dart';
 import 'package:fast_media/home/domain/usecases/get_cast_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_video_usecase.dart';
 
 
 import '../../../core/error/failure.dart';
+import '../../data/models/movie_details_model.dart';
 import '../entities/cast.dart';
 import '../entities/movie.dart';
 import '../entities/movie_details.dart';
@@ -25,6 +27,9 @@ abstract class BaseMoviesRepository{
   Future<Either<Failure,List<Cast>>> getCast(CastParameter parameter);
   Future<Either<Failure,List<Reviews>>> getReviews(ReviewsParameter parameter);
   Future<Either<Failure,String>> getVideo(VideoParameter parameter);
+  Future<Either<Failure,void>> addToFavorite(AddToFavoriteParameter parameter);
+  Future<Either<Failure,List<MovieDetailsModel>>> getFavorite(AddToFavoriteParameter parameter);
+
 
 
 

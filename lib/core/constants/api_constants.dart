@@ -12,8 +12,8 @@ class ApiConstant {
       "https://api.themoviedb.org/3/trending/${category.name.split('.').last}/day?api_key=$apiKey";
   // فيه غلط هنا وانا كتبت اللي فوق دا بداله
   // static String trendingMoviesPath(int page,Category category) => "$baseUrl/trending/${category.name.split(".").last}/week?page=$page&api_key=$apiKey";
-  static String movieDetailsPath(int id) =>
-      "$baseUrl/movie/$id?api_key=$apiKey&append_to_response=videos";
+  static String movieDetailsPath(int id,Category category) =>
+      "$baseUrl/$category/$id?api_key=$apiKey&append_to_response=videos";
   static String getReviews(int id, Category category) =>
       "$baseUrl/${category.name.split(".").last}/$id/reviews?api_key=$apiKey";
   static String getCast(int movieId, Category category) => "$baseUrl/${category.name.split(".").last}/$movieId/credits?api_key=$apiKey";

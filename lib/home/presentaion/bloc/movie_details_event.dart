@@ -30,3 +30,11 @@ class GetVideoEvent extends MovieDetailsEvent {
   @override
   List<Object> get props => [movieId,category];
 }
+
+class AddToFavoriteEvent extends MovieDetailsEvent {
+  final int movieId ;
+  const AddToFavoriteEvent({required this.movieId});
+
+  @override
+  List<Object> get props => [movieId];
+}

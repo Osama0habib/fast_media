@@ -60,4 +60,6 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
             videoState: RequestState.loaded,
             videoId: r)));
   }
+
+
 }

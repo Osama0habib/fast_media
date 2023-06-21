@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:fast_media/home/data/models/movie_details_model.dart';
 import 'package:fast_media/home/domain/entities/cast.dart';
 import 'package:fast_media/home/domain/entities/reviews.dart';
+import 'package:fast_media/home/domain/usecases/add_to_favorite.dart';
 import 'package:fast_media/home/domain/usecases/get_cast_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_reviews_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_trending_movies_usecase.dart';
@@ -97,6 +100,28 @@ class MoviesRepository extends BaseMoviesRepository {
       return Right(result);
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> addToFavorite(AddToFavoriteParameter parameter) async {
+    final result = await baseMovieRemoteDataSource.addToFavorite(parameter);
+    try {
+      return Right(result);
+    } on FirebaseException catch (failure) {
+      return Left(ServerFailure(failure.message!));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<MovieDetailsModel>>> getFavorite(AddToFavoriteParameter parameter) async {
+    final result = await baseMovieRemoteDataSource.getFavorite(parameter);
+    try {
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    } on FirebaseException catch(failure) {
+      throw FirebaseException(plugin: failure.plugin,message: failure.message,code: failure.code,stackTrace: failure.stackTrace);
     }
   }
 }
