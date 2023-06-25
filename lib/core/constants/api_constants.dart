@@ -1,3 +1,5 @@
+import 'package:fast_media/home/domain/entities/genres.dart';
+
 import 'api_enums.dart';
 
 class ApiConstant {
@@ -19,9 +21,13 @@ class ApiConstant {
   static String getCast(int movieId, Category category) => "$baseUrl/${category.name.split(".").last}/$movieId/credits?api_key=$apiKey";
   static String getVideos(int movieId, Category category) => "$baseUrl/${category.name.split(".").last}/$movieId/videos?api_key=$apiKey";
 
-  static String moviesWithGenres(Category category) =>
-      "$baseUrl/discover/${category.name.split(".").last}?api_key=$apiKey";
+  static String moviesWithGenres(Genres genres) =>
+      "$baseUrl/discover/${genres.id}?api_key=$apiKey";
 
   static String topRatedMoviewPath =
       'https://api.themoviedb.org/3/movie/top_rated?api_key=$apiKey';
+
+  static String search(String query) => "$baseUrl/search/multi?query=$query";
+  static String searchFilter(String query , Category category) => "$baseUrl/search/${category.name.split(".").last}?query=$query";
 }
+

@@ -7,12 +7,14 @@ import 'package:fast_media/home/domain/usecases/add_to_favorite.dart';
 import 'package:fast_media/home/domain/usecases/get_cast_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_reviews_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_video_usecase.dart';
+import 'package:fast_media/home/domain/usecases/search_usecase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import '../../../../core/error/error_message_model.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../domain/entities/cast.dart';
+import '../../../domain/entities/movie.dart';
 import '../../../domain/usecases/get_movie_details_usecase.dart';
 import '../../../domain/usecases/get_movie_recommendation_usecase.dart';
 import '../../../domain/usecases/get_trending_movies_usecase.dart';
@@ -40,6 +42,8 @@ abstract class BaseMovieRemoteDataSource {
       VideoParameter parameter);
   Future<void> addToFavorite(AddToFavoriteParameter parameter);
   Future<List<MovieDetailsModel>> getFavorite(AddToFavoriteParameter parameter);
+  Future<List<Movie>> search(SearchParameter parameter);
+
 }
 
 class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
@@ -170,10 +174,23 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
     final MovieDetailsModel movie = await getMovieDetails(MovieDetailsParameter(movieId: movieId));
     favList.add(movie);
       });
-      return List<MovieDetailsModel>.from(favList).toList();
+      return favList;
 
     }on FirebaseException catch(e){
       throw FirebaseException(plugin: e.plugin,stackTrace: e.stackTrace,code: e.code,message: e.message);
+    }
+  }
+
+  @override
+  Future<List<Movie>> search(SearchParameter parameter) async {
+    final response = await Dio().get(parameter.category == Category.all ?ApiConstant.search( parameter.query) : ApiConstant.searchFilter(parameter.query, parameter.category));
+    if (response.statusCode == 200) {
+      print(response.data);
+      return List<Movie>.from((response.data["results"] as List)
+          .map((e) => MovieModel.fromJson(e)));
+    } else {
+      throw ServerException(
+          errorMessageModel: ErrorMessageModel.fromJson(response.data));
     }
   }
 }

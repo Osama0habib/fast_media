@@ -72,6 +72,10 @@ class RecommendedListView extends StatelessWidget {
                 ),
               ],
             );
+          case RequestState.initial:
+            return Center(
+              child: Text(state.trendingMoviesError),
+            );
         }
       },
     );

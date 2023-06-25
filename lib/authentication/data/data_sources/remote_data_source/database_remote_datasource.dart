@@ -28,8 +28,11 @@ class DatabaseRemoteDatasource extends BaseDatabaseRemoteDataSource {
 
   @override
   Future<UserModel> retrieveUserData(GetUserDataParameter parameters) async {
+    print("retrieve User Data");
     DocumentSnapshot<Map<String, dynamic>> snapshot =
     await db.collection("Users").doc(parameters.id).get();
+    print(snapshot.data());
+    // DocumentSnapshot<Map<String, dynamic>> favorite = await db.collection("Users").doc(parameters.id).collection("favorite").get();
     return UserModel.fromFireStore(snapshot);
   }
 }

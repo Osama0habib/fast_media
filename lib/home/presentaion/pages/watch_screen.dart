@@ -117,6 +117,10 @@ class WatchScreen extends StatelessWidget {
                 return const Center(
                   child: Text("error Loading Video"),
                 );
+              case RequestState.initial:
+                return const Center(
+                  child: Text("error Loading Video"),
+                );
             }
           },
         ),

@@ -20,12 +20,14 @@ class HomeState extends Equatable {
     String? trendingMoviesError,
     List<Movie>? topRatedMovies,
     RequestState? topRatedMoviesRequestState,
-    String? topRatedMoviesError,}) =>
+    String? topRatedMoviesError,
+}) =>
       HomeState(upComingMovies: upComingMovies ?? this.upComingMovies,
         upComingRequestState:
         upComingRequestState ?? this.upComingRequestState,
         upComingError:
         upComingError ?? this.upComingError,
+
         trendingMovies: trendingMovies ?? this.trendingMovies,
         trendingMoviesRequestState:
         trendingMoviesRequestState ?? this.trendingMoviesRequestState,
@@ -47,7 +49,8 @@ class HomeState extends Equatable {
     this.trendingMoviesError = "",
     this.topRatedMovies = const [],
     this.topRatedMoviesRequestState = RequestState.loading,
-    this.topRatedMoviesError = ""});
+    this.topRatedMoviesError = "",
+});
 
 // final RequestState loadMoreRequestState;
 
@@ -63,5 +66,6 @@ class HomeState extends Equatable {
         topRatedMovies,
         topRatedMoviesRequestState,
         topRatedMoviesError,
+
       ];
 }

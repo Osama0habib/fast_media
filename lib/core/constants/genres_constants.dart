@@ -21,3 +21,5 @@ List<Genres> genres = [
   const Genres(name: "War", id: 10752),
   const Genres(name: "Western", id: 37),
 ];
+
+// enum Genres {Action ,Adventure,Animation,Comedy,Crime,documentary,drama,family,fantasy,history,horror,music,mystery,romance,scienceFiction,thriller,war,western}

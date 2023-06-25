@@ -40,6 +40,8 @@ class VideoControls extends StatelessWidget {
                   if(state.isPlaying) {
 
                     state.youtubePlayerController?.pause();
+                  }else{
+                    state.youtubePlayerController?.play();
                   }
                 },
                 icon: Icon(state.isPlaying ? Icons.pause : Icons.play_arrow,size: 18,)),

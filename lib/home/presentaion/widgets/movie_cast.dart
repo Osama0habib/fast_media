@@ -82,6 +82,9 @@ class MovieCast extends StatelessWidget {
             );
           case RequestState.error:
             return  Center(child: Text(state.reviewsErrorMsg),);
+          case RequestState.initial:
+            return  Center(child: Text(state.reviewsErrorMsg),);
+
         }
       },
     );

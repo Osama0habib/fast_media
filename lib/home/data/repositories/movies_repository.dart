@@ -8,6 +8,7 @@ import 'package:fast_media/home/domain/usecases/get_cast_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_reviews_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_trending_movies_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_video_usecase.dart';
+import 'package:fast_media/home/domain/usecases/search_usecase.dart';
 
 
 import '../../../core/error/exceptions.dart';
@@ -116,6 +117,18 @@ class MoviesRepository extends BaseMoviesRepository {
   @override
   Future<Either<Failure, List<MovieDetailsModel>>> getFavorite(AddToFavoriteParameter parameter) async {
     final result = await baseMovieRemoteDataSource.getFavorite(parameter);
+    try {
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    } on FirebaseException catch(failure) {
+      throw FirebaseException(plugin: failure.plugin,message: failure.message,code: failure.code,stackTrace: failure.stackTrace);
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Movie>>> search(SearchParameter parameter) async {
+    final result = await baseMovieRemoteDataSource.search(parameter);
     try {
       return Right(result);
     } on ServerException catch (failure) {

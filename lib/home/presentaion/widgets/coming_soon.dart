@@ -208,6 +208,10 @@ class _ComingSoonListViewState extends State<ComingSoonListView> {
             return Center(
               child: Text(state.upComingError),
             );
+          case RequestState.initial:
+            return Center(
+              child: Text(state.upComingError),
+            );
         }
       },
     );

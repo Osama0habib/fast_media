@@ -8,6 +8,7 @@ import '../../data/models/cast_model.dart';
 import '../../data/models/reviews_model.dart';
 import '../../domain/entities/cast.dart';
 import '../../domain/entities/reviews.dart';
+import '../../domain/usecases/add_to_favorite.dart';
 import '../../domain/usecases/get_cast_usecase.dart';
 import '../../domain/usecases/get_reviews_usecase.dart';
 import '../../domain/usecases/get_video_usecase.dart';
@@ -19,10 +20,12 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   final GetCastUseCase getCastUseCase;
   final GetReviewsUseCase getReviewsUseCase;
   final GetVideoUseCase getVideoUseCase;
-  MovieDetailsBloc(this.getCastUseCase, this.getReviewsUseCase, this.getVideoUseCase) : super(const MovieDetailsState()) {
+  final AddToFavoriteUseCase addToFavoriteUseCase;
+  MovieDetailsBloc(this.getCastUseCase, this.getReviewsUseCase, this.getVideoUseCase, this.addToFavoriteUseCase) : super(const MovieDetailsState()) {
    on<GetCastEvent>(_getCast);
    on<GetReviewsEvent>(_getReviews);
    on<GetVideoEvent>(_getVideo);
+   on<AddToFavoriteEvent>(_addToFavorite);
   }
 
   Future<FutureOr<void>> _getCast(GetCastEvent event, Emitter<MovieDetailsState> emit) async {
@@ -62,4 +65,13 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   }
 
 
+
+  Future<FutureOr<void>> _addToFavorite(AddToFavoriteEvent event, Emitter<MovieDetailsState> emit) async {
+    final result = await addToFavoriteUseCase(
+        AddToFavoriteParameter(movieId: event.movieId));
+    result.fold((l) => emit(state.copyWith(addToFavoriteState: RequestState.error,
+            addToFavoriteError: l.message)),
+            (r) => emit(state.copyWith(
+            addToFavoriteState: RequestState.loaded,)));
+  }
 }

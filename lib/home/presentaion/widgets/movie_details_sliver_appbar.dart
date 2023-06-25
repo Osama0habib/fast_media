@@ -24,10 +24,13 @@ class MovieDetailsSliverAppBar extends StatelessWidget {
         .size
         .height;
     return SliverAppBar(
-      actions: const [
-        Icon(
-          Icons.favorite,
+      actions:  [
+        IconButton(
+         icon: Icon(Icons.favorite),
           color: kSeconderyColor,
+          onPressed: (){
+            context.read<MovieDetailsBloc>().add(AddToFavoriteEvent(movieId: movie.id));
+          },
         ),
         SizedBox(
           width: 24.0,

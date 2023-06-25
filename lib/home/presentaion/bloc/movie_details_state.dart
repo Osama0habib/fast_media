@@ -10,6 +10,8 @@ class MovieDetailsState extends Equatable {
   final String castErrorMsg;
   final RequestState reviewsState;
   final String reviewsErrorMsg;
+  final RequestState addToFavoriteState;
+  final String addToFavoriteError;
 
   const MovieDetailsState(
       {this.videoState = RequestState.loading,
@@ -20,7 +22,9 @@ class MovieDetailsState extends Equatable {
       this.castState = RequestState.loading,
       this.castErrorMsg = "",
       this.reviewsState = RequestState.loading,
-      this.reviewsErrorMsg = ""});
+      this.reviewsErrorMsg = "",
+        this.addToFavoriteError = "",
+        this.addToFavoriteState = RequestState.initial});
 
   MovieDetailsState copyWith({
     String? videoId,
@@ -32,6 +36,8 @@ class MovieDetailsState extends Equatable {
     String? castErrorMsg,
     RequestState? reviewsState,
     String? reviewsErrorMsg,
+    RequestState? addToFavoriteState,
+    String? addToFavoriteError
   }) =>
       MovieDetailsState(
           videoState: videoState ?? this.videoState,
@@ -42,6 +48,8 @@ class MovieDetailsState extends Equatable {
           castState: castState ?? this.castState,
           reviewsState: reviewsState ?? this.reviewsState,
           castErrorMsg: castErrorMsg ?? this.castErrorMsg,
+          addToFavoriteState: addToFavoriteState ?? this.addToFavoriteState,
+          addToFavoriteError: addToFavoriteError ?? this.addToFavoriteError,
           reviewsErrorMsg: reviewsErrorMsg ?? this.reviewsErrorMsg);
 
   @override
@@ -55,5 +63,7 @@ class MovieDetailsState extends Equatable {
         castErrorMsg,
         reviewsState,
         reviewsErrorMsg,
+    addToFavoriteState,
+    addToFavoriteError,
       ];
 }

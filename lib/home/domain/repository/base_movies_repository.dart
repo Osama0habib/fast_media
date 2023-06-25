@@ -3,6 +3,7 @@ import 'package:fast_media/home/domain/entities/reviews.dart';
 import 'package:fast_media/home/domain/usecases/add_to_favorite.dart';
 import 'package:fast_media/home/domain/usecases/get_cast_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_video_usecase.dart';
+import 'package:fast_media/home/domain/usecases/search_usecase.dart';
 
 
 import '../../../core/error/failure.dart';
@@ -29,6 +30,8 @@ abstract class BaseMoviesRepository{
   Future<Either<Failure,String>> getVideo(VideoParameter parameter);
   Future<Either<Failure,void>> addToFavorite(AddToFavoriteParameter parameter);
   Future<Either<Failure,List<MovieDetailsModel>>> getFavorite(AddToFavoriteParameter parameter);
+  Future<Either<Failure,List<Movie>>> search(SearchParameter parameter);
+
 
 
 

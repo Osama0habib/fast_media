@@ -20,13 +20,16 @@ import 'package:fast_media/authentication/domain/use_cases/verify_email_usecase.
 import 'package:fast_media/authentication/domain/use_cases/verify_password_reset_code_usecase.dart';
 import 'package:fast_media/authentication/presentation/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:fast_media/authentication/presentation/bloc/sign_up_bloc/sign_up_bloc.dart';
+import 'package:fast_media/home/domain/usecases/add_to_favorite.dart';
 import 'package:fast_media/home/domain/usecases/get_reviews_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_top_rated_movies_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_trending_movies_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_up_coming_movies_usecase.dart';
 import 'package:fast_media/home/domain/usecases/get_video_usecase.dart';
+import 'package:fast_media/home/domain/usecases/search_usecase.dart';
 import 'package:fast_media/home/presentaion/bloc/home_bloc.dart';
 import 'package:fast_media/home/presentaion/bloc/movie_details_bloc.dart';
+import 'package:fast_media/home/presentaion/bloc/search_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -46,7 +49,8 @@ class ServiceLocator {
     sl.registerFactory(() => SignInBloc(sl(),sl(),sl(),sl(),sl(),sl()));
     sl.registerFactory(() => SignUpBloc(sl(), sl()));
     sl.registerFactory(() => HomeBloc(sl(),sl(),sl()));
-    sl.registerFactory(() => MovieDetailsBloc(sl(), sl(),sl()));
+    sl.registerFactory(() => MovieDetailsBloc(sl(), sl(),sl(),sl()));
+    sl.registerFactory(() => SearchBloc(sl()));
 
 
     /// Remote DataSource
@@ -80,6 +84,9 @@ class ServiceLocator {
     sl.registerLazySingleton(() => GetCastUseCase(sl()));
     sl.registerLazySingleton(() => GetReviewsUseCase(sl()));
     sl.registerLazySingleton(() => GetVideoUseCase(sl()));
+    sl.registerLazySingleton(() => AddToFavoriteUseCase(sl()));
+    sl.registerLazySingleton(() => SearchUseCase(sl()));
+
 
 
 

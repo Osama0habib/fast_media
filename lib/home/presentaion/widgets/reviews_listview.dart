@@ -138,6 +138,10 @@ class ReviewsListView extends StatelessWidget {
             return Center(
               child: Text(state.reviewsErrorMsg),
             );
+          case RequestState.initial:
+            return Center(
+              child: Text(state.reviewsErrorMsg),
+            );
         }
       },
     );
