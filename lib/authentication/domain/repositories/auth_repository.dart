@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:fast_media/authentication/data/data_sources/remote_data_source/database_remote_datasource.dart';
 import 'package:fast_media/authentication/domain/use_cases/confirm_new_password_usecase.dart';
 import 'package:fast_media/authentication/domain/use_cases/forget_password_usecase.dart';
 import 'package:fast_media/authentication/domain/use_cases/sign_in_with_email_usecase.dart';
@@ -8,10 +7,7 @@ import 'package:fast_media/authentication/domain/use_cases/verify_password_reset
 import 'package:fast_media/core/base_usercase/base_auth_usecase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../data/data_sources/remote_data_source/firebase_auth_Remote_service.dart';
-import '../../data/models/user_model.dart';
 import '../../data/repositories/base_auth_repository.dart';
-import '../use_cases/verify_email_usecase.dart';
 
 class AuthRepository implements BaseAuthRepository {
   final _auth = FirebaseAuth.instance;
@@ -43,7 +39,6 @@ class AuthRepository implements BaseAuthRepository {
           email: parameters.email, password: parameters.password);
       return Right(result);
     } on FirebaseAuthException catch (e) {
-      print("firebaseAuthExceptionnnnn : $e");
       return Left(FirebaseAuthException(code: e.code, message: e.message));
     }
   }
@@ -115,10 +110,12 @@ class AuthRepository implements BaseAuthRepository {
       final result = await _auth.sendPasswordResetEmail(
           email: parameters.email,
           actionCodeSettings: ActionCodeSettings(
-              url: "https://fastmedia.page.link/resetPassword",
-              // dynamicLinkDomain: "https://fastmedia.page.link",
-              androidInstallApp: false,
-              androidPackageName: "com.example.fast_media",handleCodeInApp: true,iOSBundleId: "com.example.fast_media",));
+            url: "https://fastmedia.page.link/resetPassword",
+            // dynamicLinkDomain: "https://fastmedia.page.link",
+            androidInstallApp: false,
+            androidPackageName: "com.example.fast_media", handleCodeInApp: true,
+            iOSBundleId: "com.example.fast_media",
+          ));
 
       return Right(result);
     } on FirebaseAuthException catch (e) {

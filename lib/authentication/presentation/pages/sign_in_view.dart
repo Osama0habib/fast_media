@@ -1,7 +1,6 @@
 import 'package:fast_media/authentication/domain/use_cases/sign_in_with_email_usecase.dart';
 import 'package:fast_media/authentication/presentation/bloc/sign_in_bloc/sign_in_bloc.dart';
 import 'package:fast_media/home/presentaion/pages/home_view.dart';
-import 'package:fast_media/colors/colors.dart';
 import 'package:fast_media/core/shared/shared_widget.dart';
 import 'package:fast_media/syles/app_styles.dart';
 import 'package:fast_media/authentication/presentation/widgets/custom_appbar.dart';
@@ -37,7 +36,6 @@ class SignInView extends StatelessWidget {
           },
           child: BlocConsumer<SignInBloc, FormsValidate>(
             listener: (context, state) {
-              print("error :${state.errorMessage}");
               if (state.errorMessage.isNotEmpty) {
                 showSnakeBar(context, state.errorMessage);
               }
@@ -107,8 +105,8 @@ class SignInView extends StatelessWidget {
                                     const SignInForm(),
 
 // Remember me checkBox and forgetPassword Button
-                                    Row(
-                                      children: const [
+                                    const Row(
+                                      children: [
                                         RememberMeCheckBox(),
                                         Spacer(),
                                         ForgetPasswordButton(),

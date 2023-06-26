@@ -1,6 +1,5 @@
 import 'package:fast_media/home/domain/entities/reviews.dart';
 
-import '../../domain/entities/author_details.dart';
 import 'author_details_model.dart';
 
 class ReviewsModel extends Reviews {

@@ -1,13 +1,8 @@
-import 'package:fast_media/core/constants/api_enums.dart';
 import 'package:fast_media/home/domain/entities/movie.dart';
-import 'package:fast_media/home/presentaion/bloc/movie_details_bloc.dart';
 import 'package:fast_media/home/presentaion/widgets/movie_cast.dart';
 import 'package:fast_media/home/presentaion/widgets/movie_overview.dart';
 import 'package:fast_media/home/presentaion/widgets/reviews_listview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../core/services/service_locator.dart';
 
 class MovieDetailsBody extends StatelessWidget {
   const MovieDetailsBody({

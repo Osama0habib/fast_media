@@ -35,8 +35,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> _getTrendingMovies(
       GetTrendingMoviesEvent event, Emitter<HomeState> emit) async {
-    print("getTrending");
-
     final result = await getTrendingMoviesUseCase(
         const TrendingMoviesPageParameter(page: 0));
     result.fold(
@@ -50,7 +48,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<FutureOr<void>> _getUpComingMovies(
       GetUpComingMoviesEvent event, Emitter<HomeState> emit) async {
-    print("getUpComing");
     final result = await getUpComingMoviesUseCase(const NoParameter());
     result.fold(
         (l) => emit(state.copyWith(
@@ -62,7 +59,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<FutureOr<void>> _getTopRatedMovies(
       GetTopRatedMoviesEvent event, Emitter<HomeState> emit) async {
-    print("getTopRated");
     final result = await getTopRatedMoviesUseCase(
         const TopRatedMoviesPageParameter(page: 0));
     result.fold(

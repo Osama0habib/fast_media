@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:fast_media/colors/colors.dart';
 import 'package:fast_media/syles/app_styles.dart';
 import 'package:flutter/material.dart';
@@ -96,15 +94,20 @@ class ReviewsListView extends StatelessWidget {
                                     // )
                                     RatingBar(
                                         ratingWidget: RatingWidget(
-                                            full:
-                                                const Icon(Icons.star_rounded,color: kSeconderyColor,),
+                                            full: const Icon(
+                                              Icons.star_rounded,
+                                              color: kSeconderyColor,
+                                            ),
                                             half: const Icon(
-                                                Icons.star_half_rounded,color: kSeconderyColor,),
+                                              Icons.star_half_rounded,
+                                              color: kSeconderyColor,
+                                            ),
                                             empty: const Icon(
-                                                Icons.star_border_rounded,color: kSeconderyColor,)),
+                                              Icons.star_border_rounded,
+                                              color: kSeconderyColor,
+                                            )),
                                         onRatingUpdate: (double rate) {},
                                         itemSize: 14,
-
                                         allowHalfRating: true,
                                         maxRating: 10.0,
                                         minRating: 0.0,
@@ -120,7 +123,7 @@ class ReviewsListView extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.58,
                               child: Text(
-                                "${state.reviews[index].content}",
+                                state.reviews[index].content,
                                 style: AppStyles.inActive14.copyWith(
                                   color: Colors.white,
                                 ),

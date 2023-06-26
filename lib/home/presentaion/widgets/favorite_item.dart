@@ -32,7 +32,7 @@ class FavoriteItem extends StatelessWidget {
                     imageUrl:
                         "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/action-movie-poster-template-design-0f5fff6262fdefb855e3a9a3f0fdd361_screen.jpg?ts=1636996054"),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Column(
@@ -91,12 +91,17 @@ class FavoriteItem extends StatelessWidget {
                 width: 43,
                 height: 43,
                 child: MaterialButton(
-                    onPressed: () {},
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    color: kWireframe_4,
-                    child: SvgPicture.asset("assets/icons/bag.svg",height: 18,width: 18,),),
+                  onPressed: () {},
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  color: kWireframe_4,
+                  child: SvgPicture.asset(
+                    "assets/icons/bag.svg",
+                    height: 18,
+                    width: 18,
+                  ),
+                ),
               )
             ],
           ),

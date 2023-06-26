@@ -19,20 +19,19 @@ class MovieDetailsSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery
-        .of(context)
-        .size
-        .height;
+    double h = MediaQuery.of(context).size.height;
     return SliverAppBar(
-      actions:  [
+      actions: [
         IconButton(
-         icon: Icon(Icons.favorite),
+          icon: const Icon(Icons.favorite),
           color: kSeconderyColor,
-          onPressed: (){
-            context.read<MovieDetailsBloc>().add(AddToFavoriteEvent(movieId: movie.id));
+          onPressed: () {
+            context
+                .read<MovieDetailsBloc>()
+                .add(AddToFavoriteEvent(movieId: movie.id));
           },
         ),
-        SizedBox(
+        const SizedBox(
           width: 24.0,
         ),
       ],
@@ -65,14 +64,8 @@ class FlexibleSpaceBarBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery
-        .of(context)
-        .size
-        .width;
-    double h = MediaQuery
-        .of(context)
-        .size
-        .height;
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
 
     return Stack(
       clipBehavior: Clip.none,
@@ -81,7 +74,7 @@ class FlexibleSpaceBarBackground extends StatelessWidget {
         CachedNetworkImage(
           imageUrl: ApiConstant.imageUrl(path: movie.backdropPath),
           progressIndicatorBuilder: (context, url, progress) =>
-          const Center(child: CircularProgressIndicator.adaptive()),
+              const Center(child: CircularProgressIndicator.adaptive()),
           fit: BoxFit.cover,
           alignment: Alignment.topCenter,
           width: w,
@@ -149,10 +142,9 @@ class FlexibleSpaceBarBackground extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  WatchScreen(
-                                    videoId:state.videoId,
-                                  ),
+                              builder: (context) => WatchScreen(
+                                videoId: state.videoId,
+                              ),
                             ),
                           );
                         },

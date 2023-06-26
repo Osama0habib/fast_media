@@ -37,11 +37,10 @@ class WatchScreen extends StatelessWidget {
                           [DeviceOrientation.portraitUp]);
                     },
                     player: YoutubePlayer(
-
                       controller: state.youtubePlayerController!,
                       // showVideoProgressIndicator: true,
                       // progressIndicatorColor: Colors.blueAccent,
-                      bottomActions: [],
+                      bottomActions: null,
                       topActions: <Widget>[
                         const SizedBox(width: 8.0),
                         IconButton(
@@ -69,8 +68,7 @@ class WatchScreen extends StatelessWidget {
                       //   state.youtubePlayerController
                       //       !.addListener(listener);
                       // },
-                      onEnded: (data) {
-                      },
+                      onEnded: (data) {},
                     ),
                     onEnterFullScreen: () {
                       context.read<VideoPlayerBloc>().add(EnterFullScreen());
@@ -79,38 +77,44 @@ class WatchScreen extends StatelessWidget {
                           decoration: const BoxDecoration(
                             gradient: kBackgroundGrediant,
                           ),
-                          child:///if Series
-                          false ? Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
+                          child:
+                              // false ? Center(
+                              //   child: Column(
+                              //     mainAxisSize: MainAxisSize.min,
+                              //     children: [
 
-                                Stack(
-                                  children: [
-                                    player,
-                                    const Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: VideoControls()),
-                                  ],
-                                ),
-                                // const Expanded(
-                                //   child: Padding(
-                                //     padding: EdgeInsets.all(8.0),
-                                //     child: CustomScrollView(slivers: [
-                                //       SliverPadding(
-                                //         padding :EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
-                                //
-                                //         // sliver: ShowRecommendation(
-                                //         //     recommendations: recommendations),
-                                //       )
-                                //     ]),
-                                //   ),
-                                // )
-                              ],
+                              //       Stack(
+                              //         children: [
+                              //           player,
+                              //           const Align(
+                              //               alignment: Alignment.bottomCenter,
+                              //               child: VideoControls()),
+                              //         ],
+                              //       ),
+                              //       // const Expanded(
+                              //       //   child: Padding(
+                              //       //     padding: EdgeInsets.all(8.0),
+                              //       //     child: CustomScrollView(slivers: [
+                              //       //       SliverPadding(
+                              //       //         padding :EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
+                              //       //
+                              //       //         // sliver: ShowRecommendation(
+                              //       //         //     recommendations: recommendations),
+                              //       //       )
+                              //       //     ]),
+                              //       //   ),
+                              //       // )
+                              //     ],
+                              //   ),
+                              // ) :
+                              Stack(children: [
+                            Center(
+                              child: player,
                             ),
-                          ) : Stack(children: [
-                            Center(child: player,),
-                            const Align(alignment: Alignment.bottomCenter,child: VideoControls(),)
+                            const Align(
+                              alignment: Alignment.bottomCenter,
+                              child: VideoControls(),
+                            )
                           ]),
                         ));
               case RequestState.error:

@@ -1,5 +1,3 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fast_media/authentication/data/data_sources/remote_data_source/database_remote_datasource.dart';
 import 'package:fast_media/authentication/data/data_sources/remote_data_source/firebase_auth_Remote_service.dart';
 import 'package:fast_media/authentication/data/repositories/base_auth_repository.dart';
@@ -30,9 +28,7 @@ import 'package:fast_media/home/domain/usecases/search_usecase.dart';
 import 'package:fast_media/home/presentaion/bloc/home_bloc.dart';
 import 'package:fast_media/home/presentaion/bloc/movie_details_bloc.dart';
 import 'package:fast_media/home/presentaion/bloc/search_bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../authentication/presentation/bloc/sign_in_bloc/sign_in_bloc.dart';
 import '../../home/data/data_sources/remote_data_source/remote_movie_data_source.dart';
@@ -40,30 +36,32 @@ import '../../home/data/repositories/movies_repository.dart';
 import '../../home/domain/repository/base_movies_repository.dart';
 import '../../home/domain/usecases/get_cast_usecase.dart';
 
-
 final sl = GetIt.instance;
+
 class ServiceLocator {
-  void init(){
+  void init() {
     /// Bloc
-    sl.registerFactory(() => AuthenticationBloc(sl(),sl(),sl()));
-    sl.registerFactory(() => SignInBloc(sl(),sl(),sl(),sl(),sl(),sl()));
+    sl.registerFactory(() => AuthenticationBloc(sl(), sl(), sl()));
+    sl.registerFactory(() => SignInBloc(sl(), sl(), sl(), sl(), sl(), sl()));
     sl.registerFactory(() => SignUpBloc(sl(), sl()));
-    sl.registerFactory(() => HomeBloc(sl(),sl(),sl()));
-    sl.registerFactory(() => MovieDetailsBloc(sl(), sl(),sl(),sl()));
+    sl.registerFactory(() => HomeBloc(sl(), sl(), sl()));
+    sl.registerFactory(() => MovieDetailsBloc(sl(), sl(), sl(), sl()));
     sl.registerFactory(() => SearchBloc(sl()));
 
-
     /// Remote DataSource
-    sl.registerLazySingleton<BaseFirebaseAuthRemoteDataSource>(() => FirebaseAuthRemoteService());
-    sl.registerLazySingleton<BaseDatabaseRemoteDataSource>(() => DatabaseRemoteDatasource());
-    sl.registerLazySingleton<BaseMovieRemoteDataSource>(() => MovieRemoteDataSource());
-
+    sl.registerLazySingleton<BaseFirebaseAuthRemoteDataSource>(
+        () => FirebaseAuthRemoteService());
+    sl.registerLazySingleton<BaseDatabaseRemoteDataSource>(
+        () => DatabaseRemoteDatasource());
+    sl.registerLazySingleton<BaseMovieRemoteDataSource>(
+        () => MovieRemoteDataSource());
 
     /// Repository
     sl.registerLazySingleton<BaseAuthRepository>(() => AuthRepository());
-    sl.registerLazySingleton<BaseDatabaseRepository>(() => DatabaseRepository(sl()));
-    sl.registerLazySingleton<BaseMoviesRepository>(() => MoviesRepository(sl()));
-
+    sl.registerLazySingleton<BaseDatabaseRepository>(
+        () => DatabaseRepository(sl()));
+    sl.registerLazySingleton<BaseMoviesRepository>(
+        () => MoviesRepository(sl()));
 
     /// Usecases
     sl.registerLazySingleton(() => ConfirmNewPasswordUseCase(sl()));
@@ -87,15 +85,9 @@ class ServiceLocator {
     sl.registerLazySingleton(() => AddToFavoriteUseCase(sl()));
     sl.registerLazySingleton(() => SearchUseCase(sl()));
 
-
-
-
-
     //
     // sl.registerSingletonAsync<PackageInfo>(() async => await PackageInfo.fromPlatform());
     // sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
     // sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
-
-
   }
 }

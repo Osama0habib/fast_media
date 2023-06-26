@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 
 import '../../data/models/author_details_model.dart';
-import 'author_details.dart';
 
 class Reviews extends Equatable {
   final String author;
@@ -12,17 +11,23 @@ class Reviews extends Equatable {
   final String updatedAt;
   final String url;
 
-  const Reviews({required this.author,
-    this.authorDetails,
-    required this.content,
-    required this.createdAt,
-    required this.id,
-    required this.updatedAt,
-    required this.url});
+  const Reviews(
+      {required this.author,
+      this.authorDetails,
+      required this.content,
+      required this.createdAt,
+      required this.id,
+      required this.updatedAt,
+      required this.url});
 
   @override
-  List<Object?> get props =>
-      [author, authorDetails, content, createdAt, id, updatedAt, url,];
-
-
+  List<Object?> get props => [
+        author,
+        authorDetails,
+        content,
+        createdAt,
+        id,
+        updatedAt,
+        url,
+      ];
 }

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fast_media/authentication/presentation/bloc/sign_in_bloc/sign_in_bloc.dart';
 
 import '../../../data/models/user_model.dart';
 import '../../../domain/use_cases/save_userdata_usecase.dart';
@@ -29,7 +28,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   Future<FutureOr<void>> _signUpWithEmail(
       SignUpWithEmailEvent event, Emitter<SignUpState> emit) async {
     emit(state.copyWith(isLoading: true));
-    print(_isFormValid());
     if (_isFormValid()) {
       final result = await signUpWithEmailUseCase(SignUpWithEmailParameter(
           email: event.email, password: event.password));
@@ -97,7 +95,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   // final RegExp _phoneRegExp = RegExp(r'^(?:[+0]9)?[0-9]{10}$');
 
   bool _isPhoneValid(String phone) {
-    return phone.length >= 11 ;
+    return phone.length >= 11;
   }
 
   bool _isUserNameValid(String userName) {
@@ -113,7 +111,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   bool _isFormValid() {
-    print("state.isEmailValid : ${state.isEmailValid} , state.isPasswordValid : ${state.isPasswordValid} , state.isUserNameValid : ${state.isUserNameValid} , state.isPhoneValid : ${state.isPhoneValid}");
     return state.isEmailValid &&
         state.isPasswordValid &&
         state.isUserNameValid &&

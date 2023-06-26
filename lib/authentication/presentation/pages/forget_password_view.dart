@@ -1,5 +1,4 @@
 import 'package:fast_media/authentication/presentation/bloc/sign_in_bloc/sign_in_bloc.dart';
-import 'package:fast_media/authentication/presentation/pages/forget_password_code_page.dart';
 import 'package:fast_media/core/shared/shared_widget.dart';
 import 'package:fast_media/syles/app_styles.dart';
 import 'package:fast_media/authentication/presentation/widgets/custom_appbar.dart';
@@ -20,8 +19,8 @@ class ForgetPasswordView extends StatelessWidget {
     return BlocProvider<SignInBloc>(
       create: (context) => sl<SignInBloc>(),
       child: BlocConsumer<SignInBloc, FormsValidate>(
-        listener:(context, state) async {
-          if(state is ForgetPasswordSuccess){
+        listener: (context, state) async {
+          if (state is ForgetPasswordSuccess) {
             // final PendingDynamicLinkData? initialLink = await FirebaseDynamicLinks.instance.getInitialLink();
             // if (initialLink != null) {
             //   print("initialLink $initialLink");
@@ -39,12 +38,10 @@ class ForgetPasswordView extends StatelessWidget {
               print("dynamicLinkData : $dynamicLinkData");
               // Navigator.pushNamed(context, dynamicLinkData.link.path);
             }).onError((error) {
-              print("error : $error");
               // Handle errors
             });
-            if(state.errorMessage.isNotEmpty){
-              print("error :${state.errorMessage}");
-              if(state.errorMessage.isNotEmpty){
+            if (state.errorMessage.isNotEmpty) {
+              if (state.errorMessage.isNotEmpty) {
                 showSnakeBar(context, state.errorMessage);
               }
             }
@@ -92,10 +89,7 @@ class ForgetPasswordView extends StatelessWidget {
 
                     //welcome message 2
                     SizedBox(
-                      width: MediaQuery
-                          .of(context)
-                          .size
-                          .width * 0.6,
+                      width: MediaQuery.of(context).size.width * 0.6,
                       child: Text(
                         'Please enter your email address to recive a verification card',
                         textAlign: TextAlign.center,
@@ -131,8 +125,7 @@ class ForgetPasswordView extends StatelessWidget {
                     ),
                   ],
                 ),
-                if(state.isLoading)
-                  const Loading(),
+                if (state.isLoading) const Loading(),
               ],
             ),
           );

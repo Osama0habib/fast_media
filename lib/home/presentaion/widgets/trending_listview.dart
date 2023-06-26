@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:fast_media/colors/colors.dart';
-import 'package:fast_media/core/constants/api_constants.dart';
 import 'package:fast_media/core/constants/api_enums.dart';
 import 'package:fast_media/home/presentaion/bloc/home_bloc.dart';
 import 'package:fast_media/home/presentaion/widgets/movie_listview_item.dart';
