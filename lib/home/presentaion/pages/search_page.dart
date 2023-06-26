@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_media/colors/colors.dart';
 import 'package:fast_media/core/constants/api_enums.dart';
 import 'package:fast_media/home/presentaion/bloc/search_bloc.dart';
 import 'package:fast_media/home/presentaion/widgets/select_category.dart';
+import 'package:fast_media/syles/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,50 +15,51 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        decoration: const BoxDecoration(gradient: kBackgroundGrediant),
-        child: BlocProvider<SearchBloc>(
-          create: (context) => sl<SearchBloc>(),
-          child: BlocBuilder<SearchBloc, SearchState>(
-            builder: (context, state) {
-              return Column(
+    return Container(
+      decoration: const BoxDecoration(gradient: kBackgroundGrediant),
+      child: BlocProvider<SearchBloc>(
+        create: (context) => sl<SearchBloc>(),
+        child: BlocBuilder<SearchBloc, SearchState>(
+          builder: (context, state) {
+            return SafeArea(
+              child: Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 24, vertical: 24),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                            child: SizedBox(
-                          height: 46,
-                          child: TextField(
-                            textAlignVertical: TextAlignVertical.center,
-                            onChanged: (String? value) {
-                              if (value != null) {
-                                context.read<SearchBloc>().add(OnSearchEvent(
-                                    genres: genres[0],
-                                    category: Category.all,
-                                    query: value));
-                              }
-                            },
-                            decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(top: 10),
-                                hintText: "Search",
-                                alignLabelWithHint: true,
-                                hintStyle: const TextStyle(fontSize: 14),
-                                filled: true,
-                                fillColor: kWireframe_4,
-                                prefixIconColor: kWireframe_3,
-                                prefixIcon: const Icon(Icons.search),
-                                suffixIcon: const Icon(Icons.mic),
-                                suffixIconColor: kWireframe_3,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                    borderSide: BorderSide.none)),
+                          child: SizedBox(
+                            height: 46,
+                            child: TextField(
+                              textAlignVertical: TextAlignVertical.center,
+                              onChanged: (String? value) {
+                                if (value != null) {
+                                  context.read<SearchBloc>().add(OnSearchEvent(
+                                      genres: genres[0],
+                                      category: Category.all,
+                                      query: value));
+                                }
+                              },
+                              decoration: InputDecoration(
+                                  contentPadding:
+                                      const EdgeInsets.only(top: 10),
+                                  hintText: "Search",
+                                  alignLabelWithHint: true,
+                                  hintStyle: const TextStyle(fontSize: 14),
+                                  filled: true,
+                                  fillColor: kWireframe_4,
+                                  prefixIconColor: kWireframe_3,
+                                  prefixIcon: const Icon(Icons.search),
+                                  suffixIcon: const Icon(Icons.mic),
+                                  suffixIconColor: kWireframe_3,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(50),
+                                      borderSide: BorderSide.none)),
+                            ),
                           ),
-                        )),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(left: 24.0),
                           child: IconButton(
@@ -70,48 +73,51 @@ class SearchPage extends StatelessWidget {
                     ),
                   ),
                   const SelectCategory(),
-                  Row(
-                    children: [
-                      Checkbox(value: false, onChanged: (bool? check) {}),
-                      DropdownButton<String>(
-                        iconEnabledColor: kSeconderyColor,
-                        underline: SizedBox(),
-                        dropdownColor: kSeconderyColor,
-                        style: const TextStyle(color: Colors.white),
-                        hint: const Text("Movie",
-                            style: TextStyle(color: Colors.white)),
-                        items: <String>[
-                          'Movie',
-                          'Series',
-                        ].map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (_) {},
-                      ),
-                      Spacer(),
-                      Text("Sort by ",
-                          style: TextStyle(color: kSeconderyColor)),
-                      DropdownButton<String>(
-                        iconEnabledColor: kSeconderyColor,
-                        underline: SizedBox(),
-                        dropdownColor: kSeconderyColor,
-                        style: const TextStyle(color: Colors.white),
-                        hint: const Text("Horror"),
-                        items: <String>[
-                          'Movie',
-                          'Series',
-                        ].map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (_) {},
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Row(
+                      children: [
+                        Checkbox(value: false, onChanged: (bool? check) {}),
+                        DropdownButton<String>(
+                          iconEnabledColor: kSeconderyColor,
+                          underline: const SizedBox.shrink(),
+                          dropdownColor: kSeconderyColor,
+                          style: const TextStyle(color: Colors.white),
+                          hint: const Text("Movie",
+                              style: TextStyle(color: Colors.white)),
+                          items: <String>[
+                            'Movie',
+                            'Series',
+                          ].map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (_) {},
+                        ),
+                        const Spacer(),
+                        const Text("Sort by ",
+                            style: TextStyle(color: kSeconderyColor)),
+                        DropdownButton<String>(
+                          iconEnabledColor: kSeconderyColor,
+                          underline: const SizedBox.shrink(),
+                          dropdownColor: kSeconderyColor,
+                          style: const TextStyle(color: Colors.white),
+                          hint: const Text("Horror"),
+                          items: <String>[
+                            'Movie',
+                            'Series',
+                          ].map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (_) {},
+                        ),
+                      ],
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -122,7 +128,7 @@ class SearchPage extends StatelessWidget {
                                 TextStyle(fontSize: 20, color: kWireframe_2)),
                         DropdownButton<String>(
                           iconEnabledColor: kSeconderyColor,
-                          underline: SizedBox(),
+                          underline: const SizedBox.shrink(),
                           dropdownColor: kSeconderyColor,
                           style: const TextStyle(color: Colors.white),
                           hint: const Text("View All",
@@ -141,20 +147,53 @@ class SearchPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // GridView.builder(
-                  //   gridDelegate:
-                  //       const SliverGridDelegateWithFixedCrossAxisCount(
-                  //           crossAxisCount: 2,
-                  //           crossAxisSpacing: 5,
-                  //           childAspectRatio: 3 / 4,
-                  //           mainAxisSpacing: 5),
-                  //   itemBuilder: (BuildContext context, int index) {},
-                  //   itemCount: 20,
-                  // ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      child: GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 4.0,
+                          childAspectRatio: 2 / 3,
+                          mainAxisSpacing: 12.0,
+                        ),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Column(
+                            children: [
+                              SizedBox(
+                                height:
+                                    MediaQuery.sizeOf(context).height * 0.27,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(33.0),
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        'https://www.sonypictures.com/sites/default/files/styles/max_560x840/public/title-key-art/65_onesheet_1400x2100_he.jpg?itok=FbbE_0lI',
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 80,
+                                child: Text(
+                                  'Movie Title',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.center,
+                                  style: AppStyles.heading_3
+                                      .copyWith(color: kWireframe_1),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                        itemCount: 20,
+                      ),
+                    ),
+                  ),
                 ],
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
