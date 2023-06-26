@@ -118,8 +118,16 @@ class CastListviewItem extends StatelessWidget {
         child: Row(children: [
           CircleAvatar(
             radius: constraints.maxWidth * 0.15,
-            backgroundImage: CachedNetworkImageProvider(
-              ApiConstant.imageUrl(path: cast.profilePath),
+            child: CachedNetworkImage(
+              errorWidget: (context, url, error) => const Icon(
+                Icons.person,
+                size: 28,
+              ),
+              imageUrl: ApiConstant.imageUrl(path: cast.profilePath),
+              imageBuilder: (context, imageProvider) => CircleAvatar(
+                radius: constraints.maxWidth * 0.15,
+                backgroundImage: imageProvider,
+              ),
             ),
           ),
           SizedBox(

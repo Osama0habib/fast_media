@@ -11,12 +11,14 @@ class MovieModel extends Movie {
     required super.releaseDate,
     required super.isFavorite,
     required super.posterPath,
+    required super.mediaType,
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
       id: json["id"],
       title: json["title"] ?? json['name'] ?? '',
+      mediaType: json['media_type'] ?? 'movie',
       backdropPath: json["backdrop_path"] ?? "/kqjL17yufvn9OVLyXYpvtyrFfak.jpg",
       posterPath: json['poster_path'] ?? '/kqjL17yufvn9OVLyXYpvtyrFfak.jpg',
       genreIds: List<int>.from(json["genre_ids"].map((e) => e)),

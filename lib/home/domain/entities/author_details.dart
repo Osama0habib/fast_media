@@ -4,12 +4,15 @@ class AuthorDetails extends Equatable {
   final String name;
   final String username;
   final String avatarPath;
-  final double rating;
+  final dynamic rating;
 
-  const AuthorDetails(
-      {required this.name, required this.username, required this.avatarPath, required this.rating});
+  const AuthorDetails({
+    required this.name,
+    required this.username,
+    required this.avatarPath,
+    required this.rating,
+  });
 
   @override
   List<Object> get props => [name, username, avatarPath, rating];
-
 }

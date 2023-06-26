@@ -13,13 +13,14 @@ class ReviewsModel extends Reviews {
       required super.url});
 
   factory ReviewsModel.fromJson(Map<String, dynamic> json) => ReviewsModel(
-      author: json['author'],
-      authorDetails: json['author_details'] != null
-          ? AuthorDetailsModel.fromJson(json['author_details'])
-          : null,
-      content: json['content'],
-      createdAt: json['created_at'],
-      id: json['id'],
-      updatedAt: json['updated_at'],
-      url: json['url']);
+        author: json['author'],
+        authorDetails: json['author_details'] != null
+            ? AuthorDetailsModel.fromJson(json['author_details'])
+            : null,
+        content: json['content'],
+        createdAt: json['created_at'],
+        id: json['id'],
+        updatedAt: json['updated_at'],
+        url: json['url'],
+      );
 }
