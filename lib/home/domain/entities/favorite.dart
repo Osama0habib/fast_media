@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Favorite extends Equatable {
-  final int id;
+  final String id;
   final String title;
   final String backdropPath;
   final double voteAverage;

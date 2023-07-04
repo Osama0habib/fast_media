@@ -37,16 +37,12 @@ class VideoControls extends StatelessWidget {
             // AnimatedIcon(icon: AnimatedIcons.play_pause, progress: animation),
             IconButton(
                 onPressed: () {
-                  if(state.isPlaying) {
-
-                    state.youtubePlayerController?.pause();
-                  }else{
-                    state.youtubePlayerController?.play();
-                  }
+                  context.read<VideoPlayerBloc>().add(const PlayButtonPressedEvent());
                 },
                 icon: Icon(state.isPlaying ? Icons.pause : Icons.play_arrow,size: 18,)),
             Expanded(
               child: ProgressBar(
+                timeLabelTextStyle: const TextStyle(color: Colors.white),
                 progress: state.progress,
                 // buffered: state.youtubePlayerController.,
                 total: state.youtubePlayerController!.metadata.duration,
@@ -70,20 +66,24 @@ class VideoControls extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text("${state.progress.inSeconds}/${state.youtubePlayerController?.metadata.duration.inSeconds}"),
+              child: Text("${state.progress.inSeconds}/${state.youtubePlayerController?.metadata.duration.inSeconds}",style: const TextStyle(color: Colors.white)),
             ),
             SizedBox(
               height: 32.0,
               width: 32.0,
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   icon: const Icon(Icons.volume_up_rounded,size: 16,),),
             ),
             SizedBox(
               height: 32.0,
               width: 32.0,
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   icon: const Icon(Icons.closed_caption,size: 16,)),
             ),
             SizedBox(

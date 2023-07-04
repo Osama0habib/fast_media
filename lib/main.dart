@@ -1,4 +1,5 @@
 import 'package:fast_media/authentication/presentation/bloc/authentication_bloc/authentication_bloc.dart';
+import 'package:fast_media/authentication/presentation/pages/navigation_screen.dart';
 import 'package:fast_media/home/presentaion/pages/home_view.dart';
 import 'package:fast_media/colors/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,12 +45,13 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData.dark().copyWith(
           textTheme: GoogleFonts.robotoTextTheme(textTheme),
           colorScheme: ColorScheme.fromSeed(seedColor: kSeconderyColor),
           useMaterial3: true,
         ),
-        home: const HomeView(),
+        home: const NavigationScreen(),
       ),
     );
   }

@@ -19,3 +19,6 @@ class VideoPlayerInitEvent extends VideoPlayerEvent {
 class EnterFullScreen extends VideoPlayerEvent {
 
 }
+class PlayButtonPressedEvent extends VideoPlayerEvent{
+  const PlayButtonPressedEvent();
+}

@@ -1,3 +1,4 @@
+import 'package:fast_media/authentication/data/models/user_model.dart';
 import 'package:fast_media/colors/colors.dart';
 import 'package:fast_media/home/domain/entities/movie.dart';
 import 'package:fast_media/home/presentaion/widgets/movie_details_body.dart';

@@ -29,7 +29,7 @@ class ApiConstant {
   static String topRatedMoviewPath =
       'https://api.themoviedb.org/3/movie/top_rated?api_key=$apiKey';
 
-  static String search(String query) => "$baseUrl/search/multi?query=$query";
+  static String search(String query) => "$baseUrl/search/multi?query=$query&&api_key=$apiKey";
   static String searchFilter(String query, Category category) =>
-      "$baseUrl/search/${category.name.split(".").last}?query=$query";
+      "$baseUrl/search/${category.name.split(".").last}?query=$query&&api_key=$apiKey";
 }

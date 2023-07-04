@@ -13,9 +13,16 @@ part 'video_player_state.dart';
 class VideoPlayerBloc extends Bloc<VideoPlayerEvent, VideoPlayerState> {
 
   VideoPlayerBloc() : super(const VideoPlayerState()) {
+    state.youtubePlayerController?.addListener(() {
+      emit(state);
+    });
     on<VideoPlayerInitEvent>(_initializeVideoPlayerController);
 
     on<EnterFullScreen>(_enterFullScreen);
+
+    on<PlayButtonPressedEvent>(_playButtonPressed);
+
+
   }
 
   FutureOr<void> _initializeVideoPlayerController(VideoPlayerInitEvent event, Emitter<VideoPlayerState> emit) {
@@ -37,5 +44,17 @@ class VideoPlayerBloc extends Bloc<VideoPlayerEvent, VideoPlayerState> {
     });
 
     state.youtubePlayerController?.play();
+  }
+
+
+
+  FutureOr<void> _playButtonPressed(event, Emitter<VideoPlayerState> emit) {
+    if(state.isPlaying) {
+      state.youtubePlayerController?.pause();
+      emit(state.copyWith(isPlaying: false));
+    }else{
+      state.youtubePlayerController?.play();
+      emit(state.copyWith(isPlaying: true));
+    }
   }
 }

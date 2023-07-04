@@ -5,27 +5,28 @@ import 'package:fast_media/home/domain/entities/movie_details.dart';
 import '../../../core/error/failure.dart';
 import '../entities/movie.dart';
 import '../repository/base_movies_repository.dart';
+import 'add_to_favorite.dart';
 import 'base_usecase.dart';
 
-class AddToFavoriteUseCase extends BaseUseCase<void, AddToFavoriteParameter> {
+class RemoveFromFavoriteUseCase extends BaseUseCase<void, RemoveFromFavoriteParameter> {
   final BaseMoviesRepository baseMoviesRepository;
 
-  AddToFavoriteUseCase(this.baseMoviesRepository);
+  RemoveFromFavoriteUseCase(this.baseMoviesRepository);
 
   @override
-  Future<Either<Failure, void>> call(AddToFavoriteParameter parameters) async =>
-      await baseMoviesRepository.addToFavorite(parameters);
+  Future<Either<Failure, void>> call(RemoveFromFavoriteParameter parameters) async =>
+      await baseMoviesRepository.removeFromFavorite(parameters);
 }
 
-class AddToFavoriteParameter extends Equatable {
-  final int movieId;
-  final Movie movie;
 
-  const AddToFavoriteParameter( {required this.movieId,required this.movie,});
+class RemoveFromFavoriteParameter extends Equatable {
+  final int movieId;
+
+  const RemoveFromFavoriteParameter( {required this.movieId});
 
   @override
   List<Object> get props => [
         movieId,
-    movie
+
       ];
 }

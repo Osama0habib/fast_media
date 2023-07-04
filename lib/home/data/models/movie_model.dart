@@ -1,7 +1,9 @@
+import 'package:fast_media/authentication/data/models/user_model.dart';
+
 import '../../domain/entities/movie.dart';
 
 class MovieModel extends Movie {
-  const MovieModel({
+   MovieModel({
     required super.id,
     required super.title,
     required super.backdropPath,
@@ -9,12 +11,13 @@ class MovieModel extends Movie {
     required super.overview,
     required super.voteAverage,
     required super.releaseDate,
-    required super.isFavorite,
+     super.isFavorite,
     required super.posterPath,
     required super.mediaType,
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
+    // print(UserModel.userModel!.favorite);
     return MovieModel(
       id: json["id"],
       title: json["title"] ?? json['name'] ?? '',
@@ -25,7 +28,8 @@ class MovieModel extends Movie {
       overview: json["overview"],
       voteAverage: json["vote_average"].toDouble(),
       releaseDate: json["release_date"] ?? "",
-      isFavorite: false,
+      isFavorite:false,
     );
   }
+
 }

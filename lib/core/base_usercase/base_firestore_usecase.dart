@@ -6,8 +6,8 @@ abstract class BaseFireStoreUseCase<T, Parameters> {
   Future<Either<FirebaseException, T>> call(Parameters parameters);
 }
 
-class NoParameter extends Equatable {
-  const NoParameter();
-  @override
-  List<Object> get props => [];
-}
+// class NoParameter extends Equatable {
+//   const NoParameter();
+//   @override
+//   List<Object> get props => [];
+// }

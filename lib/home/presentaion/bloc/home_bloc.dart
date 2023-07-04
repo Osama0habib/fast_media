@@ -8,6 +8,7 @@ import 'package:fast_media/home/data/models/movie_model.dart';
 import 'package:fast_media/home/domain/usecases/base_usecase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../core/base_usercase/base_auth_usecase.dart';
 import '../../../core/constants/api_enums.dart';
 import '../../domain/entities/movie.dart';
 import '../../domain/usecases/get_top_rated_movies_usecase.dart';

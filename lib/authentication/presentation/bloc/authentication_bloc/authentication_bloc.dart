@@ -27,14 +27,14 @@ class AuthenticationBloc
     on<AuthenticationEvent>((event, emit) async {
       if (event is AuthenticationStarted) {
         Stream<User?> stream =
-            _authenticationRepository.authChanges(const NoParameter());
+             _authenticationRepository.authChanges(const NoParameter());
         await emit.onEach(stream,
             onData: (user) {
               if (user == null) {
                 emit(const AuthenticationFailure());
               } else {
                 final userId = user.uid;
-                add(GetUSerDataEvent(userId));
+               add(GetUSerDataEvent(userId));
               }
             },
             onError: (Object object, StackTrace stackTrace) =>

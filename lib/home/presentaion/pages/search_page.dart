@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_media/colors/colors.dart';
+import 'package:fast_media/core/constants/api_constants.dart';
 import 'package:fast_media/core/constants/api_enums.dart';
 import 'package:fast_media/home/presentaion/bloc/search_bloc.dart';
 import 'package:fast_media/home/presentaion/widgets/select_category.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/constants/genres_constants.dart';
 import '../../../core/services/service_locator.dart';
+import '../../domain/entities/genres.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -38,7 +40,7 @@ class SearchPage extends StatelessWidget {
                                 if (value != null) {
                                   context.read<SearchBloc>().add(OnSearchEvent(
                                       genres: genres[0],
-                                      category: Category.all,
+                                      category: Category.movie,
                                       query: value));
                                 }
                               },
@@ -85,13 +87,10 @@ class SearchPage extends StatelessWidget {
                           style: const TextStyle(color: Colors.white),
                           hint: const Text("Movie",
                               style: TextStyle(color: Colors.white)),
-                          items: <String>[
-                            'Movie',
-                            'Series',
-                          ].map((String value) {
+                          items: Category.values.map((Category value) {
                             return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
+                              value: value.name,
+                              child: Text(value.name),
                             );
                           }).toList(),
                           onChanged: (_) {},
@@ -99,19 +98,16 @@ class SearchPage extends StatelessWidget {
                         const Spacer(),
                         const Text("Sort by ",
                             style: TextStyle(color: kSeconderyColor)),
-                        DropdownButton<String>(
+                        DropdownButton<Genres>(
                           iconEnabledColor: kSeconderyColor,
                           underline: const SizedBox.shrink(),
                           dropdownColor: kSeconderyColor,
                           style: const TextStyle(color: Colors.white),
                           hint: const Text("Horror"),
-                          items: <String>[
-                            'Movie',
-                            'Series',
-                          ].map((String value) {
-                            return DropdownMenuItem<String>(
+                          items: genres.map((Genres value) {
+                            return DropdownMenuItem<Genres>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value.name),
                             );
                           }).toList(),
                           onChanged: (_) {},
@@ -133,13 +129,10 @@ class SearchPage extends StatelessWidget {
                           style: const TextStyle(color: Colors.white),
                           hint: const Text("View All",
                               style: TextStyle(color: kSeconderyColor)),
-                          items: <String>[
-                            'Movie',
-                            'Series',
-                          ].map((String value) {
+                          items: Category.values.map((Category value) {
                             return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
+                              value: value.name,
+                              child: Text(value.name),
                             );
                           }).toList(),
                           onChanged: (_) {},
@@ -168,14 +161,15 @@ class SearchPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(33.0),
                                   child: CachedNetworkImage(
                                     imageUrl:
-                                        'https://www.sonypictures.com/sites/default/files/styles/max_560x840/public/title-key-art/65_onesheet_1400x2100_he.jpg?itok=FbbE_0lI',
+                                        ApiConstant.imageUrl(path: state.searchResult[index].backdropPath),
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
                               ),
                               SizedBox(
                                 width: 80,
                                 child: Text(
-                                  'Movie Title',
+                                  state.searchResult[index].title,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.center,
@@ -186,7 +180,7 @@ class SearchPage extends StatelessWidget {
                             ],
                           );
                         },
-                        itemCount: 20,
+                        itemCount: state.searchResult.length,
                       ),
                     ),
                   ),

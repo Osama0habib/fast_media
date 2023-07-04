@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:fast_media/core/base_usercase/base_auth_usecase.dart';
+import 'package:fast_media/home/data/models/favorite_model.dart';
 import 'package:fast_media/home/domain/entities/reviews.dart';
 import 'package:fast_media/home/domain/usecases/add_to_favorite.dart';
 import 'package:fast_media/home/domain/usecases/get_cast_usecase.dart';
@@ -17,6 +19,7 @@ import '../usecases/get_movie_recommendation_usecase.dart';
 import '../usecases/get_reviews_usecase.dart';
 import '../usecases/get_trending_movies_usecase.dart';
 import '../usecases/get_top_rated_movies_usecase.dart';
+import '../usecases/remove_from_favorite.dart';
 
 abstract class BaseMoviesRepository{
 
@@ -29,7 +32,8 @@ abstract class BaseMoviesRepository{
   Future<Either<Failure,List<Reviews>>> getReviews(ReviewsParameter parameter);
   Future<Either<Failure,String>> getVideo(VideoParameter parameter);
   Future<Either<Failure,void>> addToFavorite(AddToFavoriteParameter parameter);
-  Future<Either<Failure,List<MovieDetailsModel>>> getFavorite(AddToFavoriteParameter parameter);
+  Future<Either<Failure,void>> removeFromFavorite(RemoveFromFavoriteParameter parameter);
+  Future<Either<Failure,List<FavoriteModel>>> getFavorite(NoParameter parameter);
   Future<Either<Failure,List<Movie>>> search(SearchParameter parameter);
 
 

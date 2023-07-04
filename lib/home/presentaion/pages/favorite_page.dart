@@ -1,3 +1,4 @@
+import 'package:fast_media/authentication/data/models/user_model.dart';
 import 'package:fast_media/colors/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -35,10 +36,10 @@ class FavoritePage extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 7,
+                itemCount: UserModel.userModel?.favorite.length,
                 // shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
-                  return const FavoriteItem();
+                  return  FavoriteItem(favoriteModel: UserModel.userModel!.favorite[index]);
                 },
               ),
             )

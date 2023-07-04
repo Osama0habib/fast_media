@@ -5,7 +5,7 @@ import 'genres.dart';
 class MovieDetails extends Equatable {
   final String backdropPath;
 
-  final List<Genres> genres;
+  final List<int> genres;
   final int id;
   final String overview;
   final String releaseDate;

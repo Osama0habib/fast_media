@@ -33,8 +33,25 @@ class GetVideoEvent extends MovieDetailsEvent {
 
 class AddToFavoriteEvent extends MovieDetailsEvent {
   final int movieId ;
-  const AddToFavoriteEvent({required this.movieId});
+  final Movie movie;
+  const AddToFavoriteEvent( {required this.movie,required this.movieId});
 
   @override
-  List<Object> get props => [movieId];
+  List<Object> get props => [movieId,movie];
+}
+
+class RemoveFromFavoriteEvent extends MovieDetailsEvent {
+  final int movieId ;
+  final Movie movie;
+  const RemoveFromFavoriteEvent( {required this.movie,required this.movieId});
+
+  @override
+  List<Object> get props => [movieId,movie];
+}
+
+class GetUserFavoriteEvent extends MovieDetailsEvent {
+  const GetUserFavoriteEvent();
+
+  @override
+  List<Object> get props => [];
 }

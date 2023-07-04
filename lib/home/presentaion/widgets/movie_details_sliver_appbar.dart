@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fast_media/authentication/data/models/user_model.dart';
+import 'package:fast_media/authentication/presentation/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:fast_media/colors/colors.dart';
 import 'package:fast_media/core/constants/api_constants.dart';
+import 'package:fast_media/core/constants/api_enums.dart';
 import 'package:fast_media/home/domain/entities/movie.dart';
 import 'package:fast_media/home/presentaion/bloc/movie_details_bloc.dart';
 import 'package:fast_media/home/presentaion/pages/watch_screen.dart';
@@ -22,13 +25,32 @@ class MovieDetailsSliverAppBar extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     return SliverAppBar(
       actions: [
-        IconButton(
-          icon: const Icon(Icons.favorite),
-          color: kSeconderyColor,
-          onPressed: () {
-            context
-                .read<MovieDetailsBloc>()
-                .add(AddToFavoriteEvent(movieId: movie.id));
+        BlocConsumer<MovieDetailsBloc, MovieDetailsState>(
+          listener: (context, state){},
+          builder: (context, state) {
+            movie.isFavorite =  UserModel.userModel!.favorite.any((element) => element.id == movie.id.toString());
+
+            // print(UserModel.userModel?.favorite);
+            return IconButton(
+              icon: state.addToFavoriteState == RequestState.loading
+                  ? const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    )
+                  : Icon(movie.isFavorite
+                      ? Icons.favorite
+                      : Icons.favorite_border_outlined),
+              color: kSeconderyColor,
+              onPressed: () {
+                if (!movie.isFavorite) {
+                  context
+                      .read<MovieDetailsBloc>()
+                      .add(AddToFavoriteEvent(movieId: movie.id, movie: movie));
+                } else {
+                  context.read<MovieDetailsBloc>().add(
+                      RemoveFromFavoriteEvent(movieId: movie.id, movie: movie));
+                }
+              },
+            );
           },
         ),
         const SizedBox(

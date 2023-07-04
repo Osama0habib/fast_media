@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:fast_media/authentication/data/repositories/base_database_repository.dart';
+import 'package:fast_media/core/base_usercase/base_auth_usecase.dart';
+import 'package:fast_media/home/data/models/favorite_model.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 
 import '../../data/data_sources/remote_data_source/database_remote_datasource.dart';
@@ -24,6 +26,16 @@ class DatabaseRepository implements BaseDatabaseRepository {
   @override
   Future<Either<FirebaseException, void>> saveUserData(SaveUserDataParameter parameters) async {
     final result = await databaseRemoteDatasource.saveUserData(parameters);
+    try {
+      return Right(result);
+    }on FirebaseException catch (e){
+      return Left(FirebaseException(code: e.code,message: e.message, plugin: e.plugin));
+    }
+  }
+
+  @override
+  Future<Either<FirebaseException, List<FavoriteModel>>> getFavorite(NoParameter parameter) async {
+    final result = await databaseRemoteDatasource.getFavorite(parameter);
     try {
       return Right(result);
     }on FirebaseException catch (e){

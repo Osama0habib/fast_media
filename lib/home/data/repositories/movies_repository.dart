@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:fast_media/core/base_usercase/base_auth_usecase.dart';
+import 'package:fast_media/home/data/models/favorite_model.dart';
 import 'package:fast_media/home/data/models/movie_details_model.dart';
 import 'package:fast_media/home/domain/entities/cast.dart';
 import 'package:fast_media/home/domain/entities/reviews.dart';
@@ -20,6 +22,7 @@ import '../../domain/repository/base_movies_repository.dart';
 import '../../domain/usecases/get_movie_details_usecase.dart';
 import '../../domain/usecases/get_movie_recommendation_usecase.dart';
 import '../../domain/usecases/get_top_rated_movies_usecase.dart';
+import '../../domain/usecases/remove_from_favorite.dart';
 import '../data_sources/remote_data_source/remote_movie_data_source.dart';
 
 class MoviesRepository extends BaseMoviesRepository {
@@ -114,17 +117,17 @@ class MoviesRepository extends BaseMoviesRepository {
     }
   }
 
-  @override
-  Future<Either<Failure, List<MovieDetailsModel>>> getFavorite(AddToFavoriteParameter parameter) async {
-    final result = await baseMovieRemoteDataSource.getFavorite(parameter);
-    try {
-      return Right(result);
-    } on ServerException catch (failure) {
-      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
-    } on FirebaseException catch(failure) {
-      throw FirebaseException(plugin: failure.plugin,message: failure.message,code: failure.code,stackTrace: failure.stackTrace);
-    }
-  }
+  // @override
+  // Future<Either<Failure, List<MovieDetailsModel>>> getFavorite(AddToFavoriteParameter parameter) async {
+  //   final result = await baseMovieRemoteDataSource.getFavorite(parameter);
+  //   try {
+  //     return Right(result);
+  //   } on ServerException catch (failure) {
+  //     return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+  //   } on FirebaseException catch(failure) {
+  //     throw FirebaseException(plugin: failure.plugin,message: failure.message,code: failure.code,stackTrace: failure.stackTrace);
+  //   }
+  // }
 
   @override
   Future<Either<Failure, List<Movie>>> search(SearchParameter parameter) async {
@@ -136,5 +139,21 @@ class MoviesRepository extends BaseMoviesRepository {
     } on FirebaseException catch(failure) {
       throw FirebaseException(plugin: failure.plugin,message: failure.message,code: failure.code,stackTrace: failure.stackTrace);
     }
+  }
+
+  @override
+  Future<Either<Failure, void>> removeFromFavorite(RemoveFromFavoriteParameter parameter) async {
+    final result = await baseMovieRemoteDataSource.removeFromFavorite(parameter);
+    try {
+      return Right(result);
+    } on FirebaseException catch (failure) {
+      return Left(ServerFailure(failure.message!));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<FavoriteModel>>> getFavorite(NoParameter parameter) {
+    // TODO: implement getFavorite
+    throw UnimplementedError();
   }
 }

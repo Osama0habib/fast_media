@@ -10,9 +10,9 @@ class Movie extends Equatable {
   final String releaseDate;
   final List<int> genreIds;
   final String overview;
-  final bool isFavorite;
+  bool isFavorite;
 
-  const Movie({
+   Movie({
     required this.id,
     required this.title,
     required this.mediaType,
@@ -22,7 +22,7 @@ class Movie extends Equatable {
     required this.overview,
     required this.voteAverage,
     required this.releaseDate,
-    required this.isFavorite,
+    this.isFavorite = false,
   });
 
   @override

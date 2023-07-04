@@ -1,8 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fast_media/authentication/domain/entities/user_entity.dart';
+import 'package:fast_media/home/data/models/favorite_model.dart';
+
+import '../../../home/domain/entities/favorite.dart';
 
 class UserModel extends UserEntity {
-  const UserModel({
+
+  static UserModel? userModel ;
+
+   UserModel({
     required super.uid,
     required super.imageUrl,
     required super.isVerified,
@@ -10,11 +16,12 @@ class UserModel extends UserEntity {
     required super.displayName,
     required super.phone,
     required super.gender,
+    super.favorite = const [],
   });
 
 
   factory UserModel.fromFireStore(DocumentSnapshot<Map<String, dynamic>> doc) =>
-      UserModel(
+    userModel =  UserModel(
         uid: doc.id,
         isVerified: doc.data()!["isVerified"],
         email: doc.data()!["email"],
@@ -33,6 +40,7 @@ class UserModel extends UserEntity {
       'phone': phone,
       'imageUrl': imageUrl,
       'gender': gender,
+      'favorite' : favorite,
     };
   }
 
@@ -44,6 +52,7 @@ class UserModel extends UserEntity {
     String? imageUrl,
     String? phone,
     Gender? gender,
+    List<FavoriteModel>? favorite,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
@@ -53,6 +62,7 @@ class UserModel extends UserEntity {
       imageUrl: imageUrl ?? this.imageUrl,
       phone: phone ?? this.phone,
       gender: gender ?? this.gender,
+      favorite: favorite ?? this.favorite,
     );
   }
 }

@@ -109,9 +109,10 @@ class SettingPage extends StatelessWidget {
                   ),
                   title: 'Dark mode',
                 ),
-                const SettingRowButton(
-                  prefix: Icon(Icons.logout_outlined),
-                  suffix: Icon(
+                 SettingRowButton(
+                  onTap: (){ context.read<AuthenticationBloc>().add(AuthenticationSignedOut());},
+                  prefix: const Icon(Icons.logout_outlined),
+                  suffix: const Icon(
                     Icons.arrow_forward_ios,
                     color: kSeconderyColor,
                     size: 16,

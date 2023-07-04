@@ -1,17 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fast_media/core/constants/api_constants.dart';
+import 'package:fast_media/home/data/models/favorite_model.dart';
 import 'package:fast_media/syles/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../authentication/presentation/widgets/default_button.dart';
 import '../../../colors/colors.dart';
+import '../bloc/movie_details_bloc.dart';
 
 class FavoriteItem extends StatelessWidget {
-  const FavoriteItem({Key? key}) : super(key: key);
+  const FavoriteItem( {Key? key,required this.favoriteModel}) : super(key: key);
 
+  final FavoriteModel favoriteModel;
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10),
       child: Container(
@@ -30,68 +36,74 @@ class FavoriteItem extends StatelessWidget {
                     height: 120,
                     fit: BoxFit.cover,
                     imageUrl:
-                        "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/action-movie-poster-template-design-0f5fff6262fdefb855e3a9a3f0fdd361_screen.jpg?ts=1636996054"),
+                        ApiConstant.imageUrl(path: favoriteModel.backdropPath)),
               ),
               const SizedBox(
                 width: 20,
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Freedom", style: AppStyles.heading_2),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      RatingBar(
-                          ratingWidget: RatingWidget(
-                              empty: const Icon(Icons.star_outlined),
-                              full: const Icon(Icons.star),
-                              half: const Icon(Icons.star_half)),
-                          onRatingUpdate: (double rating) {},
-                          itemSize: 13.96),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "8.9",
-                        style:
-                            AppStyles.inActive12.copyWith(color: Colors.white),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    "2019 |3h 17 min",
-                    style: AppStyles.inActive14.copyWith(color: kWireframe_3),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  SizedBox(
-                    width: 120,
-                    height: 32,
-                    child: DefaultButton(
-                      btnText: 'Watch Now',
-                      onPressed: () {},
-                      style: AppStyles.medium_10.copyWith(
-                        color: Colors.white,
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(favoriteModel.title, style: AppStyles.heading_2,overflow: TextOverflow.ellipsis,softWrap: true,maxLines: 1,),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        RatingBar(initialRating: favoriteModel.voteAverage,
+                            maxRating: 10,
+
+                            ratingWidget: RatingWidget(
+                                empty: const Icon(Icons.star_outlined),
+                                full: const Icon(Icons.star),
+                                half: const Icon(Icons.star_half)),
+                            onRatingUpdate: (double rating) {},
+                            itemSize: 13.96),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          favoriteModel.voteAverage.toStringAsFixed(1),
+                          style:
+                              AppStyles.inActive12.copyWith(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      favoriteModel.releaseDate,
+                      style: AppStyles.inActive14.copyWith(color: kWireframe_3),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    SizedBox(
+                      width: 120,
+                      height: 32,
+                      child: DefaultButton(
+                        btnText: 'Watch Now',
+                        onPressed: () {},
+                        style: AppStyles.medium_10.copyWith(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              const Spacer(),
+              // const Spacer(),
               SizedBox(
                 width: 43,
                 height: 43,
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // context.read<MovieDetailsBloc>().add(RemoveFromFavoriteEvent(movie: , movieId: int.parse(favoriteModel.id)));
+                  },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

@@ -39,7 +39,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           uid: r.user!.uid,
           imageUrl: null,
           isVerified: false,
-          email: event.phone,
+          email: event.email,
           displayName: event.userName,
           phone: event.phone,
           gender: null,

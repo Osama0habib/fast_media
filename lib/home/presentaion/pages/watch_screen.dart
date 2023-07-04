@@ -78,35 +78,7 @@ class WatchScreen extends StatelessWidget {
                             gradient: kBackgroundGrediant,
                           ),
                           child:
-                              // false ? Center(
-                              //   child: Column(
-                              //     mainAxisSize: MainAxisSize.min,
-                              //     children: [
 
-                              //       Stack(
-                              //         children: [
-                              //           player,
-                              //           const Align(
-                              //               alignment: Alignment.bottomCenter,
-                              //               child: VideoControls()),
-                              //         ],
-                              //       ),
-                              //       // const Expanded(
-                              //       //   child: Padding(
-                              //       //     padding: EdgeInsets.all(8.0),
-                              //       //     child: CustomScrollView(slivers: [
-                              //       //       SliverPadding(
-                              //       //         padding :EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
-                              //       //
-                              //       //         // sliver: ShowRecommendation(
-                              //       //         //     recommendations: recommendations),
-                              //       //       )
-                              //       //     ]),
-                              //       //   ),
-                              //       // )
-                              //     ],
-                              //   ),
-                              // ) :
                               Stack(children: [
                             Center(
                               child: player,

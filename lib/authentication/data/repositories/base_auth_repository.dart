@@ -29,5 +29,6 @@ abstract class BaseAuthRepository {
       ConfirmNewPasswordParameter parameters);
   Future<Either<FirebaseAuthException, void>> verifyEmail(
       NoParameter parameters);
+
   // Future<String?> retrieveUserName(UserModel user);
 }

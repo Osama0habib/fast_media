@@ -20,16 +20,16 @@ class FavoriteModel extends Favorite {
   }
 
   Map<String, dynamic> toDoc() => {
-        id.toString(): {
+          "id" : id,
           "title": title,
           "backdrop_path": backdropPath,
           "vote_average": voteAverage,
           "release_date": releaseDate,
-        }
+
       };
 
   factory FavoriteModel.fromMovieModel(MovieModel movie) => FavoriteModel(
-      id: movie.id,
+      id: movie.id.toString(),
       title: movie.title,
       backdropPath: movie.backdropPath,
       voteAverage: movie.voteAverage,

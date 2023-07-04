@@ -14,8 +14,10 @@ class NavigationScreen extends StatelessWidget {
       builder: (context, state) {
         if (state is AuthenticationSuccess) {
           return const HomeView();
-        } else {
+        } else if(state is AuthenticationFailure) {
           return const SplashView();
+        }else{
+         return const Scaffold();
         }
       },
     );
